@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {  StyleSheet } from 'react-native'
-import { Content, Text, Tab, Tabs, List, ListItem, ScrollableTab, Title} from 'native-base';
+import { Content, Text, Tab, Tabs, List, ListItem, ScrollableTab, Title, Icon} from 'native-base';
 import RestaurantCard from '../components/RestaurantCard';
 import FoodList from '../components/FoodList';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -13,6 +13,10 @@ const styles = StyleSheet.create({
     color: '#FFFF00',
     fontWeight: 'bold'
   },
+  infoIconStyle:{
+    marginRight:20,
+    color: '#FFFF00'
+  }
 
 })
 
@@ -21,7 +25,8 @@ export default class RestaurantScreen extends Component {
     const restaurant = navigation.getParam('restaurant', {});
     return {
         headerTitle: restaurant.name,
-        hasTab:true
+        hasTab:true,
+        headerRight: (<Icon style={styles.infoIconStyle} name="md-information-circle" onPress={()=>{}}/>)
    }  
 }
     constructor(props) {
