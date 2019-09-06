@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Content, Text, View, Button, Icon } from 'native-base';
+import { Content, Text, View, Button, Icon, StyleProvider } from 'native-base';
 import {StyleSheet, ProgressBarAndroid} from 'react-native';
 import FoodCard from '../components/FoodCard';
 import UniqueStepView from './StepViews/UniqueStepView';
 import MultipleStepView from './StepViews/MultipleStepView';
 import { ScrollView } from 'react-native-gesture-handler';
+import LastStepView from './StepViews/LastStepView';
 
 const styles = StyleSheet.create({
   content: {
@@ -45,7 +46,8 @@ export default class ItemPurchaseScreen extends Component {
           step: 1,
           steps: [],
           choices:[],
-          subtotal: 0
+          subtotal: 0,
+          observations:""
         };
     }
     componentDidMount() {
@@ -126,6 +128,7 @@ export default class ItemPurchaseScreen extends Component {
           type:"multiple"
         }
       ]
+      steps.push({title:"Detalhes do Produto",type:"last"});
       let choices = [];
       steps.forEach(step =>{
         if(step.type == "unique"){
@@ -145,15 +148,12 @@ export default class ItemPurchaseScreen extends Component {
     handleUniqueChange(choice) {
       let { step, choices, subtotal } = this.state;
       if(steps[step-1].options[choice].value){
-        console.log("Entrou aqui");
         subtotal -= steps[step-1].options[choices[step-1]].value;
         subtotal += steps[step-1].options[choice].value;
       } else if(steps[step-1].options[choice].additional){
-        console.log("Nao, entrou aqui");
         subtotal -= steps[step-1].options[choices[step-1]].additional;
         subtotal += steps[step-1].options[choice].additional;
       }
-      console.log("chegou aqui");
       choices[step-1] = choice;
       this.setState({choices, subtotal});
     }
@@ -177,6 +177,39 @@ export default class ItemPurchaseScreen extends Component {
       }
       this.setState({choices,subtotal});
     }
+    buildMultipleItemsArray(options, choices) {
+       let multipleItemsArray = [];
+       for (var i = 0; i < choices.length; i++) {
+         if(choices[i]>0){
+           multipleItemsArray.push(options[i]);
+         }
+       }
+       return multipleItemsArray;
+    }
+  buildProductDetail(){
+    console.log("building product detail");
+    const { steps,choices } = this.state;
+    console.log(steps);
+    let productDetail = [];
+    steps.forEach((step,i) =>{
+      if(i==0){
+        console.log("add first:");
+        console.log({title: "Tamanho", items:[step.options[choices[i]]]});
+        productDetail.push({title: "Tamanho", items:[step.options[choices[i]]]});
+      }
+      else if(step.type == "unique"){
+        console.log("add unique:");
+        console.log({title: "Tamanho", items:[step.options[choices[i]]]});
+        productDetail.push({title: step.title, items:[step.options[choices[i]]]});
+      } else if(step.type == "multiple"){
+        console.log("add multiple:");
+        let multipleItemsArray = this.buildMultipleItemsArray(step.options,choices[i]);
+        console.log(multipleItemsArray);
+        productDetail.push({title: step.title, items:multipleItemsArray});
+      }
+    });
+    return productDetail;
+  }
 
   renderStepView() {
       let { steps, step, choices, subtotal } = this.state;
@@ -190,8 +223,10 @@ export default class ItemPurchaseScreen extends Component {
           return <UniqueStepView viewProps={viewProps} choiced={choiced} handleUniqueChange={this.handleUniqueChange.bind(this)} isFirstView={false} subtotal={subtotal}/>
         } else if(viewProps.type == "multiple") {
           return <MultipleStepView viewProps={viewProps} choiced={choiced} handleMultipleChange={this.handleMultipleChange.bind(this)} isFirstView={false} subtotal={subtotal}/>
-        } else {
-          return <View/>
+        } else if(step == steps.length){
+          console.log("chegou aqui")
+          let productDetail = this.buildProductDetail();
+          return <LastStepView title={"Detalhes do produto"} productDetail={productDetail} subtotal={subtotal}/>
         }
       } else {
         return <View/>
@@ -203,7 +238,7 @@ export default class ItemPurchaseScreen extends Component {
     return (
       <Content  contentContainerStyle={styles.content}>
       <ScrollView  contentContainerStyle={styles.scrollView}>
-        <FoodCard  food={item}   navigation={this.props.navigation} inactive={true}/>
+      { step == 1 || step == steps.length && <FoodCard  food={item}   navigation={this.props.navigation} inactive={true}/>}
         {this.renderStepView()}
 
         <Text>{step}</Text>
@@ -214,14 +249,23 @@ export default class ItemPurchaseScreen extends Component {
           <View style={step>1 ? styles.botButtons : styles.botButtom}>
             { step > 1 &&
             <Button iconLeft transparent onPress={() =>{this.setState({step: step-1})}}>
+            <Icon name="arrow-back"/>
               <Text>ANTERIOR</Text>
-              <Icon name="arrow-back"/>
             </Button>
             }
-            <Button iconRight transparent onPress={() =>{this.setState({step: step+1})}}>
+            { step < steps.length &&
+              <Button iconRight transparent onPress={() =>{this.setState({step: step+1})}}>
               <Text>PRÓXIMO</Text>
               <Icon name="arrow-forward"/>
             </Button>
+            }
+            {
+              step == steps.length &&
+              <Button iconRight transparent onPress={() =>{}}>
+              <Text>CONCLUIR</Text>
+            </Button>
+            }
+           
           </View>
         </View>
         }
