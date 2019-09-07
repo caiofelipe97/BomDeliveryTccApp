@@ -7,6 +7,7 @@ import {
 
 import MainScreen from "../screens/MainScreen"
 import RestaurantScreen from "../screens/RestaurantScreen"
+import InfoSreen from "../screens/InfoScreen";
 import ItemPurchaseScreen from "../screens/ItemPurchaseScreen"
 import ProfileScreen from "../screens/ProfileScreen"
 import DemandsScreen from "../screens/DemandsScreen"
@@ -15,6 +16,7 @@ const ExploreStack = createStackNavigator(
     {
         Home: MainScreen,
         Restaurant: RestaurantScreen,
+        Info:   InfoSreen,
         ItemPurchase: ItemPurchaseScreen
     },
     {

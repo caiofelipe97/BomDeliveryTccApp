@@ -4,6 +4,7 @@ import { Content, Text, Tab, Tabs, List, ListItem, ScrollableTab, Title, Icon} f
 import RestaurantCard from '../components/RestaurantCard';
 import FoodList from '../components/FoodList';
 import { ScrollView } from 'react-native-gesture-handler';
+import { StackActions } from 'react-navigation';
 
 const styles = StyleSheet.create({
   tabStyle: {
@@ -21,14 +22,23 @@ const styles = StyleSheet.create({
 })
 
 export default class RestaurantScreen extends Component {
-  static navigationOptions =  ({ navigation }) => {
-    const restaurant = navigation.getParam('restaurant', {});
-    return {
-        headerTitle: restaurant.name,
-        hasTab:true,
-        headerRight: (<Icon style={styles.infoIconStyle} name="md-information-circle" onPress={()=>{}}/>)
-   }  
-}
+    static navigationOptions =  ({ navigation }) => {
+      const restaurant = navigation.getParam('restaurant', {});
+      return {
+          headerTitle: restaurant.name,
+          hasTab:true,
+          headerRight: (<Icon style={styles.infoIconStyle} name="md-information-circle" onPress={()=>{
+            const pushAction = StackActions.push({
+                routeName: 'Info',
+                params: {
+                  restaurant: restaurant
+                },
+              });
+            navigation.dispatch(pushAction)
+            }}/>)
+      }  
+    }
+    
     constructor(props) {
         super(props);
         const { navigation } = this.props;
