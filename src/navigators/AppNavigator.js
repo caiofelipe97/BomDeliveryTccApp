@@ -7,17 +7,19 @@ import {
 
 import MainScreen from "../screens/MainScreen"
 import RestaurantScreen from "../screens/RestaurantScreen"
-import InfoSreen from "../screens/InfoScreen";
+import InfoScreen from "../screens/InfoScreen";
 import ItemPurchaseScreen from "../screens/ItemPurchaseScreen"
 import ProfileScreen from "../screens/ProfileScreen"
 import DemandsScreen from "../screens/DemandsScreen"
+import CartScreen from "../screens/CartScreen"
 
 const ExploreStack = createStackNavigator(
     {
         Home: MainScreen,
         Restaurant: RestaurantScreen,
-        Info:   InfoSreen,
-        ItemPurchase: ItemPurchaseScreen
+        Info:   InfoScreen,
+        ItemPurchase: ItemPurchaseScreen,
+        Cart:   CartScreen
     },
     {
         initialRouteKey: "Home",
@@ -32,6 +34,16 @@ const ExploreStack = createStackNavigator(
         }
     }
 )
+ExploreStack.navigationOptions = ({ navigation }) => {
+    let tabBarVisible = true;
+    if (navigation.state.index > 0) {
+      tabBarVisible = false;
+    }
+  
+    return {
+      tabBarVisible,
+    };
+}
 
 const DemandsStack = createStackNavigator(
     {
@@ -103,9 +115,6 @@ export default createBottomTabNavigator(
     {
         initialRouteName: "Home",
         order: ["Home", "Demands", "Profile"],
-        navigationOptions: {
-            tabBarVisible: true
-        },
         tabBarOptions: {
             activeTintColor: '#800080',
             inactiveTintColor: 'gray',

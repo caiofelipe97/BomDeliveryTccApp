@@ -32,9 +32,10 @@ const styles = StyleSheet.create({
       }
 })
 
-export default class InfoSreen extends Component {
+export default class InfoScreen extends Component {
     static navigationOptions = {
-        title: 'Informações',
+        title: 'Informações',          
+        tabBarVisible:false
       };
     constructor(props) {
         super(props);

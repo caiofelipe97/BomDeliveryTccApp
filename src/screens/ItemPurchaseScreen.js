@@ -33,7 +33,14 @@ export default class ItemPurchaseScreen extends Component {
         const item = navigation.getParam('item', {});
         return {
             headerTitle: item.name,
-            hasTab:true
+            hasTab:true,
+            headerLeft: (
+              <Icon
+                onPress={() => navigation.goBack()}
+                name='close'
+                style={{color: '#FFFF00', marginLeft:20, fontSize: 24 }}
+            />),
+            tabBarVisible:false
        }
     }
     constructor(props) {
@@ -47,7 +54,9 @@ export default class ItemPurchaseScreen extends Component {
           steps: [],
           choices:[],
           subtotal: 0,
-          observations:""
+          observations:"",
+          cart:[],
+          productDetail:[]
         };
     }
     componentDidMount() {
@@ -204,15 +213,20 @@ export default class ItemPurchaseScreen extends Component {
       } else if(step.type == "multiple"){
         console.log("add multiple:");
         let multipleItemsArray = this.buildMultipleItemsArray(step.options,choices[i]);
+        if(multipleItemsArray.length >0){
+          productDetail.push({title: step.title, items:multipleItemsArray});
+
+        }
         console.log(multipleItemsArray);
-        productDetail.push({title: step.title, items:multipleItemsArray});
       }
     });
     return productDetail;
   }
-
+  handleObservations(text){
+    this.setState({observations:text});
+  }
   renderStepView() {
-      let { steps, step, choices, subtotal } = this.state;
+      let { steps, step, choices, subtotal,productDetail,observations } = this.state;
 
       let viewProps = steps[step-1];
       let choiced = choices[step-1];
@@ -225,15 +239,15 @@ export default class ItemPurchaseScreen extends Component {
           return <MultipleStepView viewProps={viewProps} choiced={choiced} handleMultipleChange={this.handleMultipleChange.bind(this)} isFirstView={false} subtotal={subtotal}/>
         } else if(step == steps.length){
           console.log("chegou aqui")
-          let productDetail = this.buildProductDetail();
-          return <LastStepView title={"Detalhes do produto"} productDetail={productDetail} subtotal={subtotal}/>
+          return <LastStepView title={"Detalhes do produto"} productDetail={productDetail} subtotal={subtotal} observations={observations} handleObservations={this.handleObservations.bind(this)}/>
         }
       } else {
         return <View/>
       }
   }
   render() {
-    const { item,step, steps } = this.state;
+    const { item,step, steps,cart,observations, productDetail } = this.state;
+    const { navigation } = this.props;
 
     return (
       <Content  contentContainerStyle={styles.content}>
@@ -254,14 +268,22 @@ export default class ItemPurchaseScreen extends Component {
             </Button>
             }
             { step < steps.length &&
-              <Button iconRight transparent onPress={() =>{this.setState({step: step+1})}}>
+              <Button iconRight transparent onPress={() =>{
+                let productDetail = this.buildProductDetail();
+                this.setState({step: step+1,productDetail})
+                }}>
               <Text>PRÓXIMO</Text>
               <Icon name="arrow-forward"/>
             </Button>
             }
             {
               step == steps.length &&
-              <Button iconRight transparent onPress={() =>{}}>
+              <Button iconRight transparent onPress={() =>{
+                let product = {productDetail: productDetail, observations: observations,amount:1}
+                navigation.navigate('Cart',{
+                  cart:[...cart, product]
+                })
+                }}>
               <Text>CONCLUIR</Text>
             </Button>
             }
