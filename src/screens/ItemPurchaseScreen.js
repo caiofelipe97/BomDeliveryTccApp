@@ -226,7 +226,7 @@ export default class ItemPurchaseScreen extends Component {
     this.setState({observations:text});
   }
   renderStepView() {
-      let { steps, step, choices, subtotal,productDetail,observations } = this.state;
+      let { item ,steps, step, choices, subtotal,productDetail,observations } = this.state;
 
       let viewProps = steps[step-1];
       let choiced = choices[step-1];
@@ -246,7 +246,7 @@ export default class ItemPurchaseScreen extends Component {
       }
   }
   render() {
-    const { item,step, steps,cart,observations, productDetail } = this.state;
+    const { item,step, steps,cart,observations, productDetail,subtotal } = this.state;
     const { navigation } = this.props;
 
     return (
@@ -279,7 +279,7 @@ export default class ItemPurchaseScreen extends Component {
             {
               step == steps.length &&
               <Button iconRight transparent onPress={() =>{
-                let product = {productDetail: productDetail, observations: observations,amount:1}
+                let product = {name: item.name,productDetail: productDetail, observations: observations,subtotal:subtotal,amount:1}
                 navigation.navigate('Cart',{
                   cart:[...cart, product]
                 })
