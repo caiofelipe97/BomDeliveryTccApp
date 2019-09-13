@@ -29,7 +29,8 @@ const FoodCard = (props) =>
     const pushAction = StackActions.push({
         routeName: 'ItemPurchase',
         params: {
-          item: props.food
+          item: props.food,
+          restaurant: props.restaurant
         },
       });
       

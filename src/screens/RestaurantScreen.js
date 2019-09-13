@@ -131,7 +131,7 @@ export default class RestaurantScreen extends Component {
       return foods.map((foodArrays,i)=>{ 
         title = Object.keys(foodArrays)[0];
         foods =  foodArrays[Object.keys(foodArrays)[0]]
-        return <FoodList key={i} title={title} foods={foods}  navigation={this.props.navigation}/>
+        return <FoodList key={i} title={title} foods={foods}  navigation={this.props.navigation} restaurant={this.state.restaurant} />
     });
   }
   }

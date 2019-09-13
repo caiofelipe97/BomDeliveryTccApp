@@ -24,37 +24,49 @@ export default class CartScreen extends Component {
         super(props);
         const { navigation } = this.props;
         const cart = navigation.getParam('cart', {});
+        const restaurant = navigation.getParam('restaurant', {});
         this.state = {
-          cart: cart
+          cart: cart,
+          restaurant: restaurant,
+          orderSubtotal: 0
         };
     }
     componentDidMount() {
+        const { cart } = this.state;
+        let subtotal = 0;
+        for (i = 0; i < cart.length; i++) {
+            subtotal += cart[i].subtotal * cart[i].amount;
+        }
+        this.setState({orderSubtotal: subtotal});
     }
 
     handleMultipleChange(i, type) {
         console.log(i);
         console.log(type);
-        let { cart } = this.state;
+        let { cart, orderSubtotal } = this.state;
         if(type == 'minus'){
             if(cart[i].amount < 2){
                 console.log("Tratar tirar item do carrinho");
             }else{
                 cart[i].amount--;
+                orderSubtotal -= cart[i].subtotal;
             }
         } else if(type=='plus') {
             cart[i].amount++;
+            orderSubtotal += cart[i].subtotal;
+
         }
 
-        this.setState({cart});
+        this.setState({cart,orderSubtotal});
       }
      
   render() {
-    const {cart} = this.state;
+    const {cart, restaurant, orderSubtotal} = this.state;
     return (
       <Content>
         <ScrollView>
             <OrderDetails orderDetails={cart}  handleMultipleChange={this.handleMultipleChange.bind(this)} />
-            <PaymemtDetails/>
+            <PaymemtDetails deliveryPrice={restaurant.deliveryPrice} orderSubtotal={orderSubtotal}/>
             <Button transparent>
                 <Text>Adicionar Mais Itens</Text>
             </Button>

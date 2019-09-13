@@ -48,6 +48,7 @@ export default class ItemPurchaseScreen extends Component {
         const { navigation } = this.props;
         this.renderStepView = this.renderStepView.bind(this);
         const item = navigation.getParam('item', {});
+        const restaurant = navigation.getParam('restaurant', {});
         this.state = {
           item: item,
           step: 1,
@@ -56,7 +57,8 @@ export default class ItemPurchaseScreen extends Component {
           subtotal: 0,
           observations:"",
           cart:[],
-          productDetail:[]
+          productDetail:[],
+          restaurant: restaurant
         };
     }
     componentDidMount() {
@@ -246,7 +248,7 @@ export default class ItemPurchaseScreen extends Component {
       }
   }
   render() {
-    const { item,step, steps,cart,observations, productDetail,subtotal } = this.state;
+    const { item,step, steps,cart,observations, productDetail,subtotal, restaurant } = this.state;
     const { navigation } = this.props;
 
     return (
@@ -281,7 +283,8 @@ export default class ItemPurchaseScreen extends Component {
               <Button iconRight transparent onPress={() =>{
                 let product = {name: item.name,productDetail: productDetail, observations: observations,subtotal:subtotal,amount:1}
                 navigation.navigate('Cart',{
-                  cart:[...cart, product]
+                  cart:[...cart, product],
+                  restaurant: restaurant
                 })
                 }}>
               <Text>CONCLUIR</Text>

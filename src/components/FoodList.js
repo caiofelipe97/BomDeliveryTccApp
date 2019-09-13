@@ -13,8 +13,8 @@ const styles = StyleSheet.create({
 
 const FoodList = (props) =>
 {
-  const {title, foods} = props;
-  const foodList = foods.map( (food,i)=>(<FoodCard key={i} food={food}  navigation={props.navigation}/>));
+  const {title, foods, restaurant} = props;
+  const foodList = foods.map( (food,i)=>(<FoodCard key={i} food={food}  navigation={props.navigation} restaurant={restaurant} />));
 
 	return(
   <View>
