@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {  StyleSheet } from 'react-native'
-import { Content, Text, Tab, Tabs, List, ListItem, ScrollableTab, Title, Icon} from 'native-base';
+import { Container, Content, Text, Tab, Tabs, List, ListItem, ScrollableTab, View, Icon, Badge, Fab, Item} from 'native-base';
 import RestaurantCard from '../components/RestaurantCard';
 import FoodList from '../components/FoodList';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -45,8 +45,10 @@ export default class RestaurantScreen extends Component {
         const { navigation } = this.props;
         this.generateFoodList = this.generateFoodList.bind(this);
         const restaurant = navigation.getParam('restaurant', {});
+        const cart = navigation.getParam('cart',[]);
         this.state = {
-          restaurant: restaurant
+          restaurant: restaurant,
+          cart: cart
         };
     }
     componentDidMount() {
@@ -131,15 +133,24 @@ export default class RestaurantScreen extends Component {
       return foods.map((foodArrays,i)=>{ 
         title = Object.keys(foodArrays)[0];
         foods =  foodArrays[Object.keys(foodArrays)[0]]
-        return <FoodList key={i} title={title} foods={foods}  navigation={this.props.navigation} restaurant={this.state.restaurant} />
+        return <FoodList key={i} title={title} foods={foods}  cart={this.state.cart}  navigation={this.props.navigation} restaurant={this.state.restaurant} />
     });
   }
   }
   render() {
-    const { restaurant, foods } = this.state;
+    const { navigation } = this.props;
+    const { restaurant, foods, cart } = this.state;
+    let cartLength = 0
+    if(cart){
+      cart.forEach(item => {
+        cartLength = cartLength + item.amount
+     })
+    }
+    
     return (
+      <Container>
       <Content>
-        <RestaurantCard restaurant={restaurant} inactive={true}/>
+        <RestaurantCard restaurant={restaurant}inactive={true}/>
         <Tabs  tabBarUnderlineStyle={{ backgroundColor: '#FFFF00' }} renderTabBar={()=> <ScrollableTab />}>
           <Tab heading="Promo do dia" tabStyle={{backgroundColor: '#800080'}} textStyle={{color: '#FFFF00'}} activeTabStyle={{backgroundColor: '#800080'}} activeTextStyle={{color: '#FFFF00', fontWeight: 'bold'}}/>
           <Tab heading="Combos" tabStyle={{backgroundColor: '#800080'}} textStyle={{color: '#FFFF00'}} activeTabStyle={{backgroundColor: '#800080'}} activeTextStyle={{color: '#FFFF00', fontWeight: 'bold'}}/>
@@ -147,12 +158,35 @@ export default class RestaurantScreen extends Component {
           <Tab heading="Sanduiches" tabStyle={{backgroundColor: '#800080'}} textStyle={{color: '#FFFF00'}} activeTabStyle={{backgroundColor: '#800080'}} activeTextStyle={{color: '#FFFF00', fontWeight: 'bold'}}/>
           <Tab heading="Bebidas" tabStyle={{backgroundColor: '#800080'}} textStyle={{color: '#FFFF00'}} activeTabStyle={{backgroundColor: '#800080'}} activeTextStyle={{color: '#FFFF00', fontWeight: 'bold'}}/>
         </Tabs>
-        <ScrollView>
-          <List>
-              {this.generateFoodList(foods)}
-          </List>
-        </ScrollView>
-      </Content>
+            <List>
+                {this.generateFoodList(foods)}
+            </List>
+            </Content>
+          {
+            cart && cart.length !== 0  && 
+            <View>
+              <View pointerEvents={'none'} style= {{ position:'absolute', elevation: 40, bottom: 58, right: 18, zIndex: 1 }}>
+              <Badge  style={{ backgroundColor: '#800080' }}>
+                <Text>{cartLength}</Text>
+              </Badge>
+              </View>
+            
+              <Fab
+                style={{ backgroundColor: '#FF0000' }}
+                position="bottomRight"
+                active={false}
+                onPress={() => { 
+                    navigation.navigate('Cart',{
+                    cart:cart,
+                    restaurant: restaurant
+                  })
+                 }}
+              >
+                <Icon name="md-cart" />
+              </Fab>
+            </View>
+          }
+      </Container>
     );
   }
 }

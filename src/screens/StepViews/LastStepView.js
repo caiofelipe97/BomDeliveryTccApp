@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 
 const LastStepView = (props) =>
 {
-  const {title,productDetail,subtotal} = props;
+  const {title,productDetail,subtotal,handleObservations,observations} = props;
   const productDetailList = productDetail.map( detail =>
   { if(detail.items.length > 0){
     return (<View>
@@ -62,7 +62,7 @@ const LastStepView = (props) =>
     <Text  style={styles.valueStyle}> {formatMoney(subtotal)}</Text>
   </View>
   <Text style={styles.titleStyle}>Observações</Text>
-  <Input placeholder="Escreva aqui suas observações do produto"/>
+  <Input placeholder="Escreva aqui suas observações do produto" onChangeText={(text) => handleObservations({text})} value={observations}/>
   </View>
 	);
 };

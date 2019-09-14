@@ -30,7 +30,8 @@ const FoodCard = (props) =>
         routeName: 'ItemPurchase',
         params: {
           item: props.food,
-          restaurant: props.restaurant
+          restaurant: props.restaurant,
+          cart: props.cart
         },
       });
       

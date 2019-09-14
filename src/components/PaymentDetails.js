@@ -1,6 +1,6 @@
 import React from 'react';
 import {  StyleSheet } from 'react-native'
-import { View, List, ListItem, Text, Card, CardItem } from 'native-base';
+import { View, Text, Card, CardItem } from 'native-base';
 import {formatMoney} from '../utils/Util';
 
 const styles = StyleSheet.create({
@@ -32,22 +32,21 @@ const PaymentDetails = (props) =>
 	return(
         <Card>
           <CardItem>
-          <View  style={{flex:1}}>
-            <Text style={styles.titleStyle}>Pagamento</Text>
-            <View style={styles.textBoxStyle}>
-              <Text>Subtotal do pedido</Text>
-              <Text style={styles.valueStyle}>{formatMoney(orderSubtotal)} </Text>
+              <View  style={{flex:1}}>
+                <Text style={styles.titleStyle}>Pagamento</Text>
+                <View style={styles.textBoxStyle}>
+                  <Text>Subtotal do pedido</Text>
+                  <Text style={styles.valueStyle}>{formatMoney(orderSubtotal)}</Text>
+                </View>
+                <View style={styles.textBoxStyle}>
+                  <Text>Taxa de entrega</Text>
+                  <Text style={styles.valueStyle}>{formatMoney(deliveryPrice)}</Text>
+                </View>
+                <View style={styles.textBoxStyle}>
+                  <Text style={styles.totalTextStyle}>Total do pedido</Text>
+                  <Text style={styles.valueStyle}>{formatMoney(orderTotal)}</Text>
+                </View>
             </View>
-            <View style={styles.textBoxStyle}>
-              <Text>Taxa de entrega</Text>
-              <Text style={styles.valueStyle}>{formatMoney(deliveryPrice)} </Text>
-            </View>
-            <View style={styles.textBoxStyle}>
-              <Text style={styles.totalTextStyle}>Total do pedido</Text>
-              <Text style={styles.valueStyle}>{formatMoney(orderTotal)} </Text>
-
-            </View>
-          </View>
           </CardItem>
         </Card>
 	);

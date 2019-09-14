@@ -49,6 +49,7 @@ export default class ItemPurchaseScreen extends Component {
         this.renderStepView = this.renderStepView.bind(this);
         const item = navigation.getParam('item', {});
         const restaurant = navigation.getParam('restaurant', {});
+        const cart = navigation.getParam('cart', [])
         this.state = {
           item: item,
           step: 1,
@@ -56,7 +57,7 @@ export default class ItemPurchaseScreen extends Component {
           choices:[],
           subtotal: 0,
           observations:"",
-          cart:[],
+          cart: cart,
           productDetail:[],
           restaurant: restaurant
         };
@@ -198,28 +199,20 @@ export default class ItemPurchaseScreen extends Component {
        return multipleItemsArray;
     }
   buildProductDetail(){
-    console.log("building product detail");
     const { steps,choices } = this.state;
-    console.log(steps);
     let productDetail = [];
     steps.forEach((step,i) =>{
       if(i==0){
-        console.log("add first:");
-        console.log({title: "Tamanho", items:[step.options[choices[i]]]});
         productDetail.push({title: "Tamanho", items:[step.options[choices[i]]]});
       }
       else if(step.type == "unique"){
-        console.log("add unique:");
-        console.log({title: "Tamanho", items:[step.options[choices[i]]]});
         productDetail.push({title: step.title, items:[step.options[choices[i]]]});
       } else if(step.type == "multiple"){
-        console.log("add multiple:");
         let multipleItemsArray = this.buildMultipleItemsArray(step.options,choices[i]);
         if(multipleItemsArray.length >0){
           productDetail.push({title: step.title, items:multipleItemsArray});
 
         }
-        console.log(multipleItemsArray);
       }
     });
     return productDetail;
@@ -241,6 +234,7 @@ export default class ItemPurchaseScreen extends Component {
           return <MultipleStepView viewProps={viewProps} choiced={choiced} handleMultipleChange={this.handleMultipleChange.bind(this)} isFirstView={false} subtotal={subtotal}/>
         } else if(step == steps.length){
           console.log("chegou aqui")
+          
           return <LastStepView title={"Detalhes do produto"} productDetail={productDetail} subtotal={subtotal} observations={observations} handleObservations={this.handleObservations.bind(this)}/>
         }
       } else {
@@ -282,11 +276,16 @@ export default class ItemPurchaseScreen extends Component {
               step == steps.length &&
               <Button iconRight transparent onPress={() =>{
                 let product = {name: item.name,productDetail: productDetail, observations: observations,subtotal:subtotal,amount:1}
-                navigation.navigate('Cart',{
-                  cart:[...cart, product],
-                  restaurant: restaurant
+                let newCart = [...cart, product]
+                navigation.navigate({
+                routeName: 'Cart',
+                params: {
+                    cart: newCart,
+                    restaurant: restaurant,
+                },
                 })
-                }}>
+                }}
+                >
               <Text>CONCLUIR</Text>
             </Button>
             }

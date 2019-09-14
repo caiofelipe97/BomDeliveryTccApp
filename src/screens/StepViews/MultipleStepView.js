@@ -52,7 +52,6 @@ const MultipleStepView = (props) =>
 {
   const {title, options, min, max } = props.viewProps;
   const { choiced, handleMultipleChange, subtotal} = props;
-console.log(options)
   const optionsList = options.map( (option,i) =>
   (<ListItem  style={styles.optionStyle}>
     <View  style={styles.boxStyle}>

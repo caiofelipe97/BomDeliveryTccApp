@@ -1,6 +1,8 @@
 function _formatMoney (money){
     if(money == 0){
         return "Grátis"
+    } else if(!money){
+        return "R$ 0,00"
     }
     let formated = money
     .toFixed(2) // casas decimais
