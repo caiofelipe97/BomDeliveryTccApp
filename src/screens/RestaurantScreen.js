@@ -3,8 +3,7 @@ import {  StyleSheet } from 'react-native'
 import { Container, Content, Text, Tab, Tabs, List, ListItem, ScrollableTab, View, Icon, Badge, Fab, Item} from 'native-base';
 import RestaurantCard from '../components/RestaurantCard';
 import FoodList from '../components/FoodList';
-import { ScrollView } from 'react-native-gesture-handler';
-import { StackActions } from 'react-navigation';
+import { StackActions, NavigationActions  } from 'react-navigation';
 
 const styles = StyleSheet.create({
   tabStyle: {
@@ -27,6 +26,17 @@ export default class RestaurantScreen extends Component {
       return {
           headerTitle: restaurant.name,
           hasTab:true,
+          headerLeft: (<Icon
+            onPress={() => {
+              const resetAction = StackActions.reset({
+              index: 0,
+              actions: [NavigationActions.navigate({ routeName: 'Home' })],
+              });
+              navigation.dispatch(resetAction);
+            }}
+            name='arrow-back'
+            style={{color: '#FFFF00', marginLeft:20, fontSize: 24 }}
+        />),
           headerRight: (<Icon style={styles.infoIconStyle} name="md-information-circle" onPress={()=>{
             const pushAction = StackActions.push({
                 routeName: 'Info',
@@ -52,7 +62,6 @@ export default class RestaurantScreen extends Component {
         };
     }
     componentDidMount() {
-      console.log(this.state.restaurant.name)
       foods = [
         {'Promo do dia':[
           {
@@ -175,10 +184,15 @@ export default class RestaurantScreen extends Component {
                 style={{ backgroundColor: '#FF0000' }}
                 position="bottomRight"
                 active={false}
-                onPress={() => { 
-                    navigation.navigate('Cart',{
-                    cart:cart,
-                    restaurant: restaurant
+                onPress={() => {
+                  pageUUID =Math.random () * 10000
+                    navigation.navigate({
+                      routeName: 'Cart',
+                      params:{
+                        cart:cart,
+                        restaurant: restaurant
+                      },
+                      key: pageUUID
                   })
                  }}
               >
