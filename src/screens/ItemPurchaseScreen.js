@@ -232,9 +232,7 @@ export default class ItemPurchaseScreen extends Component {
           return <UniqueStepView viewProps={viewProps} choiced={choiced} handleUniqueChange={this.handleUniqueChange.bind(this)} isFirstView={false} subtotal={subtotal}/>
         } else if(viewProps.type == "multiple") {
           return <MultipleStepView viewProps={viewProps} choiced={choiced} handleMultipleChange={this.handleMultipleChange.bind(this)} isFirstView={false} subtotal={subtotal}/>
-        } else if(step == steps.length){
-          console.log("chegou aqui")
-          
+        } else if(step == steps.length){          
           return <LastStepView title={"Detalhes do produto"} productDetail={productDetail} subtotal={subtotal} observations={observations} handleObservations={this.handleObservations.bind(this)}/>
         }
       } else {
@@ -250,8 +248,6 @@ export default class ItemPurchaseScreen extends Component {
       <ScrollView  contentContainerStyle={styles.scrollView}>
       { step == 1 || step == steps.length && <FoodCard  food={item}   navigation={this.props.navigation} inactive={true}/>}
         {this.renderStepView()}
-
-        <Text>{step}</Text>
       </ScrollView>
         { steps.length >0 && 
         <View style={styles.bottom}  pointerEvents={'auto'}>
@@ -277,13 +273,16 @@ export default class ItemPurchaseScreen extends Component {
               <Button iconRight transparent onPress={() =>{
                 let product = {name: item.name,productDetail: productDetail, observations: observations,subtotal:subtotal,amount:1}
                 let newCart = [...cart, product]
+                pageUUID =Math.random () * 10000
+                console.log(newCart)
                 navigation.navigate({
-                routeName: 'Cart',
-                params: {
-                    cart: newCart,
-                    restaurant: restaurant,
-                },
-                })
+                  routeName: 'Cart',
+                  params: {
+                      cart: newCart,
+                      restaurant: restaurant,
+                  },
+                  key: pageUUID
+                  })
                 }}
                 >
               <Text>CONCLUIR</Text>

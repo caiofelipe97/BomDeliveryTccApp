@@ -32,18 +32,22 @@ export default class CartScreen extends Component {
      static navigationOptions =  ({ navigation }) => {
         const cart = navigation.getParam('cart', []);
         const restaurant = navigation.getParam('restaurant', {});
-        const pushAction = StackActions.push({
-            routeName: 'Restaurant',
-            params: {
-                cart: cart,
-                restaurant: restaurant
-            },
-        });
         return {
             headerTitle: 'Carrinho',
             headerLeft: (
               <Icon
-                onPress={() =>  navigation.dispatch(pushAction) }
+                onPress={() => {
+                    pageUUID =Math.random () * 10000
+                    navigation.navigate({
+                        routeName: 'Restaurant',
+                        params: {
+                            cart: cart,
+                            restaurant: restaurant
+                        },
+                        key:pageUUID
+
+                    })
+                } }
                 name='arrow-back'
                 style={{color: '#FFFF00', marginLeft:20, fontSize: 24 }}
             />),
@@ -64,10 +68,10 @@ export default class CartScreen extends Component {
     }
    
     componentDidMount() {
-        this.willFocusSubscription = this.props.navigation.addListener(
+        const { navigation } = this.props;
+        this.willFocusSubscription = navigation.addListener(
             'willFocus',
             () => {
-                const { navigation } = this.props;
                 const cart = navigation.getParam('cart', []);
                 const restaurant = navigation.getParam('restaurant', {});
                 let subtotal = 0;
@@ -103,23 +107,37 @@ export default class CartScreen extends Component {
   render() {
     const { navigation } = this.props;
     const {cart, restaurant, orderSubtotal} = this.state;
-    const pushAction = StackActions.push({
-        routeName: 'Restaurant',
-        params: {
-            cart: cart,
-            restaurant: restaurant
-        },
-    });
     return (
       <Content>
         <View>
             <OrderDetails orderDetails={cart}  handleMultipleChange={this.handleMultipleChange.bind(this)} />
             <PaymemtDetails deliveryPrice={restaurant.deliveryPrice} orderSubtotal={orderSubtotal}/>
             <View style={styles.buttonsView} >
-                <Button transparent onPress={() => { navigation.dispatch(pushAction) }}>
+                <Button transparent onPress={() => { 
+                  pageUUID =Math.random () * 10000
+                    navigation.navigate({
+                        routeName: 'Restaurant',
+                        params: {
+                            cart: cart,
+                            restaurant: restaurant
+                        },
+                        key:pageUUID
+
+                    })
+                 }}>
                     <Text  style={styles.textButtomStyle}>Adicionar Mais Itens</Text>
                 </Button>
-                <Button danger style={styles.buttomStyle}>
+                <Button style={styles.buttomStyle} onPress={() => { 
+                    pageUUID = Math.random () * 10000
+                    navigation.navigate({
+                        routeName: 'Delivery',
+                        params: {
+                            cart: cart,
+                            restaurant: restaurant
+                        },
+                        key:pageUUID
+                    })
+                 }}>
                     <Text>Selecionar forma da entrega</Text>
                 </Button>
             </View>

@@ -48,9 +48,9 @@ const UniqueStepView = (props) =>
   const { choiced, handleUniqueChange, isFirstView, subtotal } = props;
 
   const optionsList = options.map( (option,i) =>
-  (<ListItem  style={styles.optionStyle}>
+  (<ListItem  style={styles.optionStyle}  onPress={() => handleUniqueChange(i)}>
     <View  style={styles.boxStyle}>
-      <Radio value={i} selected={choiced == i} onPress={() => handleUniqueChange(i)}/>
+      <Radio value={i} selected={choiced == i}/>
       <Text style={styles.nameStyle}>{option.name} </Text>
     </View>
       { option.value && <Text style={styles.valueStyle}>{formatMoney(option.value)}</Text> }

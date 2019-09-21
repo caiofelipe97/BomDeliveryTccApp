@@ -12,6 +12,7 @@ import ItemPurchaseScreen from "../screens/ItemPurchaseScreen"
 import ProfileScreen from "../screens/ProfileScreen"
 import DemandsScreen from "../screens/DemandsScreen"
 import CartScreen from "../screens/CartScreen"
+import DeliveryScreen from "../screens/DeliveryScreen";
 
 const ExploreStack = createStackNavigator(
     {
@@ -19,7 +20,8 @@ const ExploreStack = createStackNavigator(
         Restaurant: RestaurantScreen,
         Info:   InfoScreen,
         ItemPurchase: ItemPurchaseScreen,
-        Cart:   CartScreen
+        Cart:   CartScreen,
+        Delivery: DeliveryScreen
     },
     {
         initialRouteKey: "Home",

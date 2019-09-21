@@ -16,7 +16,6 @@ export default class MainScreen extends Component {
         };
     }
     componentDidMount() {
-      console.log("TESTE")
       restaurants = [
         {
           name: "Pizzaria X",
@@ -25,7 +24,8 @@ export default class MainScreen extends Component {
           timeToDelivery:"20/50 min",
           deliveryPrice:1,
           paymentMethods:[{method:"Máquina movel",options: ["Elo - Crédito","Elo - Débito","Hipercard - Crédito","MasterCard - Crédito"]},{method:"Dinheiro"}],
-          location:"Av. Pref. Severino Bezerra Cabral, 1200 - loja 106 - Catolé, Campina Grande - PB, 58104-170"
+          location:"Av. Pref. Severino Bezerra Cabral, 1200 - loja 106 - Catolé, Campina Grande - PB, 58104-170",
+          takeOrderInRestaurant:true
         },
         {
           name: "Caio Lanches",
@@ -34,7 +34,8 @@ export default class MainScreen extends Component {
           timeToDelivery:"0/30 min",
           deliveryPrice:0,
           paymentMethods:[{method:"Máquina movel",options: ["Elo - Crédito","Elo - Débito","Hipercard - Crédito","MasterCard - Crédito"]},{method:"Dinheiro"}],
-          location:"PARTAGE - SHOPPING, Av. Pref. Severino Bezerra Cabral, 1200 - Catolé, PB, 58410-900"
+          location:"PARTAGE - SHOPPING, Av. Pref. Severino Bezerra Cabral, 1200 - Catolé, PB, 58410-900",
+          takeOrderInRestaurant:false
         },
         {
           name: "Acai Mania",
@@ -43,7 +44,8 @@ export default class MainScreen extends Component {
           timeToDelivery:"0/20 min",
           deliveryPrice:7,
           paymentMethods:[{method:"Máquina movel",options: ["Elo - Crédito","Elo - Débito","Hipercard - Crédito","MasterCard - Crédito"]},{method:"Dinheiro"}],
-          location: "R. Luiz Sodré Filho, 535 - Catolé, Campina Grande - PB, 58410-480"
+          location: "R. Luiz Sodré Filho, 535 - Catolé, Campina Grande - PB, 58410-480",
+          takeOrderInRestaurant:false
         },
         {
           name: "Pizza do paulista",
@@ -52,7 +54,8 @@ export default class MainScreen extends Component {
           timeToDelivery:"30/60 min",
           deliveryPrice:7,
           paymentMethods:[{method:"Máquina movel",options: ["Elo - Crédito","Elo - Débito","Hipercard - Crédito","MasterCard - Crédito"]},{method:"Dinheiro"}],
-          location: "R. Luiz Sodré Filho, 535 - Catolé, Campina Grande - PB, 58410-480"
+          location: "R. Luiz Sodré Filho, 535 - Catolé, Campina Grande - PB, 58410-480",
+          takeOrderInRestaurant:false
         },
         {
           name: "Pizzaria loucura",
@@ -61,7 +64,8 @@ export default class MainScreen extends Component {
           timeToDelivery:"30/60 min",
           deliveryPrice:7,
           paymentMethods:[{method:"Máquina movel",options: ["Elo - Crédito","Elo - Débito","Hipercard - Crédito","MasterCard - Crédito"]},{method:"Dinheiro"}],
-          location: "R. Luiz Sodré Filho, 535 - Catolé, Campina Grande - PB, 58410-480"
+          location: "R. Luiz Sodré Filho, 535 - Catolé, Campina Grande - PB, 58410-480",
+          takeOrderInRestaurant:false
         },
         {
           name: "Sorveteria tropical",
@@ -70,7 +74,8 @@ export default class MainScreen extends Component {
           timeToDelivery:"0/20 min",
           deliveryPrice:7,
           paymentMethods:[{method:"Máquina movel",options: ["Elo - Crédito","Elo - Débito","Hipercard - Crédito","MasterCard - Crédito"]},{method:"Dinheiro"}],
-          location: "R. Luiz Sodré Filho, 535 - Catolé, Campina Grande - PB, 58410-480"
+          location: "R. Luiz Sodré Filho, 535 - Catolé, Campina Grande - PB, 58410-480",
+          takeOrderInRestaurant:false
         },
         {
           name: "Lanchonete 420",
@@ -79,7 +84,8 @@ export default class MainScreen extends Component {
           timeToDelivery:"0/30 min",
           deliveryPrice:7,
           paymentMethods:[{method:"Máquina movel",options: ["Elo - Crédito","Elo - Débito","Hipercard - Crédito","MasterCard - Crédito"]},{method:"Dinheiro"}],
-          location: "R. Luiz Sodré Filho, 535 - Catolé, Campina Grande - PB, 58410-480"
+          location: "R. Luiz Sodré Filho, 535 - Catolé, Campina Grande - PB, 58410-480",
+          takeOrderInRestaurant:false
         }
       ]
 
