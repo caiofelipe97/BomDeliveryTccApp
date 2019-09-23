@@ -160,7 +160,7 @@ export default class RestaurantScreen extends Component {
       <Container>
       <Content>
         <RestaurantCard restaurant={restaurant}inactive={true}/>
-        <Tabs  tabBarUnderlineStyle={{ backgroundColor: '#FFFF00' }} renderTabBar={()=> <ScrollableTab />}>
+        <Tabs  tabBarUnderlineStyle={{ backgroundColor: '#FFFF00' }} renderTabBar={()=>  <ScrollableTab style={{ backgroundColor:'#800080'}}  />}>
           <Tab heading="Promo do dia" tabStyle={{backgroundColor: '#800080'}} textStyle={{color: '#FFFF00'}} activeTabStyle={{backgroundColor: '#800080'}} activeTextStyle={{color: '#FFFF00', fontWeight: 'bold'}}/>
           <Tab heading="Combos" tabStyle={{backgroundColor: '#800080'}} textStyle={{color: '#FFFF00'}} activeTabStyle={{backgroundColor: '#800080'}} activeTextStyle={{color: '#FFFF00', fontWeight: 'bold'}}/>
           <Tab heading="Pizzas" tabStyle={{backgroundColor: '#800080'}} textStyle={{color: '#FFFF00'}} activeTabStyle={{backgroundColor: '#800080'}} activeTextStyle={{color: '#FFFF00', fontWeight: 'bold'}}/>

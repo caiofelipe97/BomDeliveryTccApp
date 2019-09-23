@@ -22,7 +22,8 @@ export default class MainScreen extends Component {
           foods:["Pizza"],
           img:require("../img/pizza.jpg"),
           timeToDelivery:"20/50 min",
-          deliveryPrice:1,
+          deliveryPrice:1,         
+          rating: 5.0,
           paymentMethods:[{method:"Máquina movel",options: ["Elo - Crédito","Elo - Débito","Hipercard - Crédito","MasterCard - Crédito"]},{method:"Dinheiro"}],
           location:"Av. Pref. Severino Bezerra Cabral, 1200 - loja 106 - Catolé, Campina Grande - PB, 58104-170",
           takeOrderInRestaurant:true
@@ -33,6 +34,7 @@ export default class MainScreen extends Component {
           img:require("../img/lanchonete.jpg"),
           timeToDelivery:"0/30 min",
           deliveryPrice:0,
+          rating: 4.7,
           paymentMethods:[{method:"Máquina movel",options: ["Elo - Crédito","Elo - Débito","Hipercard - Crédito","MasterCard - Crédito"]},{method:"Dinheiro"}],
           location:"PARTAGE - SHOPPING, Av. Pref. Severino Bezerra Cabral, 1200 - Catolé, PB, 58410-900",
           takeOrderInRestaurant:false
@@ -43,6 +45,7 @@ export default class MainScreen extends Component {
           img:require("../img/acai.jpg"),
           timeToDelivery:"0/20 min",
           deliveryPrice:7,
+          rating: 4.5,
           paymentMethods:[{method:"Máquina movel",options: ["Elo - Crédito","Elo - Débito","Hipercard - Crédito","MasterCard - Crédito"]},{method:"Dinheiro"}],
           location: "R. Luiz Sodré Filho, 535 - Catolé, Campina Grande - PB, 58410-480",
           takeOrderInRestaurant:false
@@ -53,6 +56,7 @@ export default class MainScreen extends Component {
           img:require("../img/pizza2.jpg"),
           timeToDelivery:"30/60 min",
           deliveryPrice:7,
+          rating: 3.5,
           paymentMethods:[{method:"Máquina movel",options: ["Elo - Crédito","Elo - Débito","Hipercard - Crédito","MasterCard - Crédito"]},{method:"Dinheiro"}],
           location: "R. Luiz Sodré Filho, 535 - Catolé, Campina Grande - PB, 58410-480",
           takeOrderInRestaurant:false
@@ -63,6 +67,7 @@ export default class MainScreen extends Component {
           img:require("../img/pizza3.jpg"),
           timeToDelivery:"30/60 min",
           deliveryPrice:7,
+          rating: 4.0,
           paymentMethods:[{method:"Máquina movel",options: ["Elo - Crédito","Elo - Débito","Hipercard - Crédito","MasterCard - Crédito"]},{method:"Dinheiro"}],
           location: "R. Luiz Sodré Filho, 535 - Catolé, Campina Grande - PB, 58410-480",
           takeOrderInRestaurant:false
@@ -73,6 +78,7 @@ export default class MainScreen extends Component {
           img:require("../img/sorvete.jpg"),
           timeToDelivery:"0/20 min",
           deliveryPrice:7,
+          rating: 3.5,
           paymentMethods:[{method:"Máquina movel",options: ["Elo - Crédito","Elo - Débito","Hipercard - Crédito","MasterCard - Crédito"]},{method:"Dinheiro"}],
           location: "R. Luiz Sodré Filho, 535 - Catolé, Campina Grande - PB, 58410-480",
           takeOrderInRestaurant:false
@@ -83,6 +89,7 @@ export default class MainScreen extends Component {
           img:require("../img/lanchonete2.jpg"),
           timeToDelivery:"0/30 min",
           deliveryPrice:7,
+          rating: 3.5,
           paymentMethods:[{method:"Máquina movel",options: ["Elo - Crédito","Elo - Débito","Hipercard - Crédito","MasterCard - Crédito"]},{method:"Dinheiro"}],
           location: "R. Luiz Sodré Filho, 535 - Catolé, Campina Grande - PB, 58410-480",
           takeOrderInRestaurant:false

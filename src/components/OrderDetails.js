@@ -52,7 +52,7 @@ const OrderDetails = (props) =>
 {
   const {orderDetails, handleMultipleChange} = props;
   const orderList = orderDetails.map( (order,i) =>
-  (<ListItem key={i}  style={styles.orderStyle}>
+  (<ListItem key={i}style={styles.orderStyle}>
     <View  style={styles.boxStyle}>
         <Icon  name="md-remove-circle" style={styles.removeButton} onPress={()=>{handleMultipleChange(i, 'minus')}}/>
         <Text> {order.amount}</Text>
