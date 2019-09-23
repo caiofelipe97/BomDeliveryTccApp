@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {  StyleSheet } from 'react-native';
+import {  StyleSheet, Alert } from 'react-native';
 import { Content, Text, Button, View, Icon, List, ListItem, Radio} from 'native-base';
 import { StackActions,NavigationEvents } from 'react-navigation';
 
@@ -80,7 +80,8 @@ export default class DeliveryScreen extends Component {
           restaurant: restaurant,
           orderSubtotal: 0,
           adresses: [],
-          choiced: -1
+          choiced: -1,
+          adress:{}
         };
     }
     componentDidMount() {
@@ -128,11 +129,12 @@ export default class DeliveryScreen extends Component {
         console.log(deliveryAdress);
     }
   render() {
-    const { adresses, choiced } = this.state;
+    const { navigation } = this.props;
+    const { adresses, choiced, adress, cart, restaurant } = this.state;
       console.log(adresses)
       const adressesList = adresses.map((adress,i) =>{
           return(
-            <ListItem key={i}  onPress={() => this.setState({choiced: i})}>
+            <ListItem key={i}  onPress={() => this.setState({choiced: i, adress:adresses[i]})}>
                 <View  style={styles.boxStyle}>
                     <Radio value={i} selected={choiced == i}/>
                     <View style={styles.textView}>
@@ -150,7 +152,21 @@ export default class DeliveryScreen extends Component {
                 {adressesList}
             </List>
             <View style={styles.buttonsView} >
-                <Button style={styles.buttomStyle}>
+                <Button style={styles.buttomStyle} onPress={() =>{
+                    if(Object.entries(adress).length === 0) Alert.alert("Você precisa selecionar um endereço de entrega", "Selecione um dos seus endereços de entrega ou crie um novo", [
+                        {text: 'OK', onPress: () => console.log('OK Pressed')}])
+                    else{
+                        const pushAction = StackActions.push({
+                        routeName: 'Payment',
+                        params: {
+                            cart: cart,
+                            restaurant: restaurant,
+                            adress:adress
+                            },
+                        });
+                        navigation.dispatch(pushAction);
+                    }
+                }}>
                     <Text>Selecionar forma da pagamento</Text>
                 </Button>
             </View>

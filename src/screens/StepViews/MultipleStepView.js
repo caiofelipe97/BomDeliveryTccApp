@@ -53,7 +53,7 @@ const MultipleStepView = (props) =>
   const {title, options, min, max } = props.viewProps;
   const { choiced, handleMultipleChange, subtotal} = props;
   const optionsList = options.map( (option,i) =>
-  (<ListItem  style={styles.optionStyle}>
+  (<ListItem key={i} style={styles.optionStyle}>
     <View  style={styles.boxStyle}>
         <Icon  name="md-remove-circle" style={styles.removeButton} onPress={()=>{handleMultipleChange(i, 'minus')}} />
         <Text> {choiced[i]}</Text>

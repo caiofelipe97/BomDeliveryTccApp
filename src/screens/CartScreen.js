@@ -128,15 +128,15 @@ export default class CartScreen extends Component {
                     <Text  style={styles.textButtomStyle}>Adicionar Mais Itens</Text>
                 </Button>
                 <Button style={styles.buttomStyle} onPress={() => { 
-                    pageUUID = Math.random () * 10000
-                    navigation.navigate({
-                        routeName: 'Delivery',
-                        params: {
-                            cart: cart,
+
+                    const pushAction = StackActions.push({
+                    routeName: 'Delivery',
+                    params: {
+                        cart: cart,
                             restaurant: restaurant
                         },
-                        key:pageUUID
-                    })
+                    });
+                    navigation.dispatch(pushAction);
                  }}>
                     <Text>Selecionar forma da entrega</Text>
                 </Button>

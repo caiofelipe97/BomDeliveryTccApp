@@ -44,7 +44,7 @@ const PaymentDetails = (props) =>
                 </View>
                 <View style={styles.textBoxStyle}>
                   <Text style={styles.totalTextStyle}>Total do pedido</Text>
-                  <Text style={styles.valueStyle}>{formatMoney(orderTotal)}</Text>
+                  <Text style={[styles.valueStyle,styles.totalTextStyle]}>{formatMoney(orderTotal)}</Text>
                 </View>
             </View>
           </CardItem>

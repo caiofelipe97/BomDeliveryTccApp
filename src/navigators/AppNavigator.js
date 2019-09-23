@@ -13,6 +13,7 @@ import ProfileScreen from "../screens/ProfileScreen"
 import DemandsScreen from "../screens/DemandsScreen"
 import CartScreen from "../screens/CartScreen"
 import DeliveryScreen from "../screens/DeliveryScreen";
+import PaymentScreen from "../screens/PaymentScreen";
 
 const ExploreStack = createStackNavigator(
     {
@@ -21,7 +22,8 @@ const ExploreStack = createStackNavigator(
         Info:   InfoScreen,
         ItemPurchase: ItemPurchaseScreen,
         Cart:   CartScreen,
-        Delivery: DeliveryScreen
+        Delivery: DeliveryScreen,
+        Payment: PaymentScreen
     },
     {
         initialRouteKey: "Home",
