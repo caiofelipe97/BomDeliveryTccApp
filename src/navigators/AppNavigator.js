@@ -29,11 +29,12 @@ const ExploreStack = createStackNavigator(
         initialRouteKey: "Home",
         defaultNavigationOptions: {
             headerStyle: {
-              backgroundColor: '#800080',
+              backgroundColor: '#800080'
             },
             headerTintColor: '#FFFF00',
             headerTitleStyle: {
               fontWeight: 'bold',
+              alignContent: 'center'
             },
         }
     }
@@ -57,11 +58,21 @@ const DemandsStack = createStackNavigator(
         initialRouteKey: "Demands",
         defaultNavigationOptions: {
             headerStyle: {
-              backgroundColor: '#800080',
+                backgroundColor: '#800080',
+                shadowColor: 'transparent',
+                borderBottomWidth: 0,
+                    shadowRadius: 0,
+                shadowOffset: {
+                height: 0,
+                },
+                elevation: 0,
+                shadowOpacity: 0,
+                height: 45
             },
             headerTintColor: '#FFFF00',
             headerTitleStyle: {
               fontWeight: 'bold',
+              marginTop: 10
             },
         }
     }
