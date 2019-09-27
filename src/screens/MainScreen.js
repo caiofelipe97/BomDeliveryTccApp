@@ -1,28 +1,64 @@
-import React, { Component } from 'react';
-import { Content } from 'native-base';
+import React, {useState, useEffect} from 'react';
+import * as firebase from 'firebase';
+require('firebase/firestore');
+import {Content} from 'native-base';
 import RestaurantCard from '../components/RestaurantCard';
-import { ScrollView } from 'react-native-gesture-handler';
+var firebaseConfig = {
+  apiKey: 'AIzaSyD6rCLWpVS9pqW8vc7-_TeP7sTfkXZhz_g',
+  authDomain: 'bom-delivery.firebaseapp.com',
+  databaseURL: 'https://bom-delivery.firebaseio.com',
+  projectId: 'bom-delivery',
+  storageBucket: '',
+  messagingSenderId: '92000871135',
+  appId: '1:92000871135:web:5ef14997953c0a759dbf6a',
+  measurementId: 'G-VNXKTWX8CP',
+};
 
-export default class MainScreen extends Component {
-    static navigationOptions = {
-      title: 'Bom Delivery',
-    };
-    constructor(props) {
-        super(props);
-        this.state = {
-            color: props.color,
-            restaurants: []
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
-        };
-    }
-    componentDidMount() {
+const MainScreen = ({navigation}) => {
+  const [restaurants, setRestaurants] = useState([]);
+
+  useEffect(() => {
+    db.collection('restaurants')
+      .get()
+      .then(snap => {
+        const rests = [];
+        snap.forEach(el => {
+          rests.push(el.data());
+        });
+        setRestaurants(rests);
+      });
+  }, []);
+
+  const renderRestaurants = () => {
+    return restaurants.map((restaurant, index) => (
+      <RestaurantCard
+        key={index}
+        restaurant={restaurant}
+        navigation={navigation}
+        inactive={false}
+      />
+    ));
+  };
+
+  return <Content>{renderRestaurants()}</Content>;
+};
+
+MainScreen.navigationOptions = {
+  title: 'Bom Delivery',
+};
+
+export default MainScreen;
+/*
       restaurants = [
         {
           name: "Pizzaria X",
           foods:["Pizza"],
           img:require("../img/pizza.jpg"),
           timeToDelivery:"20/50 min",
-          deliveryPrice:1,         
+          deliveryPrice:1,
           rating: 5.0,
           paymentMethods:[{method:"Máquina movel",options: ["Elo - Crédito","Elo - Débito","Hipercard - Crédito","MasterCard - Crédito"]},{method:"Dinheiro"}],
           location:"Av. Pref. Severino Bezerra Cabral, 1200 - loja 106 - Catolé, Campina Grande - PB, 58104-170",
@@ -95,25 +131,4 @@ export default class MainScreen extends Component {
           takeOrderInRestaurant:false
         }
       ]
-
-      this.setState({restaurants: restaurants})
-      
-    }
-  renderRestaurants(restaurants) {
-      console.log(restaurants)
-      return restaurants.map((restaurant, index
-      ) => 
-        <RestaurantCard key={index} restaurant={restaurant} navigation={this.props.navigation} inactive={false}/>
-      )
-  }
-  render() {
-    let {restaurants} = this.state
-    return (
-        <Content>
-          <ScrollView>
-            {this.renderRestaurants(restaurants)}
-          </ScrollView>
-        </Content>
-    );
-  }
-}
+      */

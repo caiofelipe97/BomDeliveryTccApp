@@ -1,6 +1,6 @@
-import { createSwitchNavigator, createAppContainer } from 'react-navigation';
+import {createSwitchNavigator, createAppContainer} from 'react-navigation';
 
-import AppNavigator from './AppNavigator'
+import AppNavigator from './AppNavigator';
 
 const SwitchNavigator = createSwitchNavigator(
   {
@@ -8,8 +8,7 @@ const SwitchNavigator = createSwitchNavigator(
   },
   {
     initialRouteName: 'App',
-  }
+  },
 );
 
 export default createAppContainer(SwitchNavigator);
-

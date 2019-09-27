@@ -1,20 +1,20 @@
-import React from 'react'
-import { Root } from 'native-base'
-import { MainNavigator } from './navigators'
-import { LoadingProvider } from './components/contexts/LoadingContext'
-import Loading from './components/Loading'
+import React, {useEffect} from 'react';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
+import * as firebase from 'firebase';
+import {Root} from 'native-base';
+import {MainNavigator} from './navigators';
+import store from './store';
+//TODO: put initializeApp here
 
-class App extends React.Component {
-  render() {
-    return (
-      <LoadingProvider>
-        <Root>
-          <MainNavigator />
-        </Root>
-        <Loading />
-      </LoadingProvider>
-    )
-  }
-}
+const App = () => {
+  return (
+    <Provider store={store}>
+      <Root>
+        <MainNavigator />
+      </Root>
+    </Provider>
+  );
+};
 
-export default App
+export default App;

@@ -1,10 +1,12 @@
 import React from 'react';
-import { Modal } from 'react-native'
-import { Spinner } from 'native-base'
-import withLoading from './hocs/withLoading'
+import {Modal} from 'react-native';
+import {Spinner} from 'native-base';
+import withLoading from './hocs/withLoading';
 
-const Loading = ({ isLoading }) => {
-  if (!isLoading) return null
+const Loading = ({isLoading}) => {
+  if (!isLoading) {
+    return null;
+  }
 
   return (
     <Modal transparent={true}>
@@ -18,7 +20,7 @@ const Loading = ({ isLoading }) => {
         }}
       />
     </Modal>
-  )
-}
+  );
+};
 
-export default withLoading(Loading)
+export default withLoading(Loading);
