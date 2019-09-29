@@ -73,7 +73,7 @@ export default class CartScreen extends Component {
       const cart = navigation.getParam('cart', []);
       const restaurant = navigation.getParam('restaurant', {});
       let subtotal = 0;
-      for (i = 0; i < cart.length; i++) {
+      for (let i = 0; i < cart.length; i++) {
         subtotal += cart[i].subtotal * cart[i].amount;
       }
       this.setState({orderSubtotal: subtotal, cart, restaurant});
@@ -118,7 +118,7 @@ export default class CartScreen extends Component {
             <Button
               transparent
               onPress={() => {
-                pageUUID = Math.random() * 10000;
+                let pageUUID = Math.random() * 10000;
                 navigation.navigate({
                   routeName: 'Restaurant',
                   params: {

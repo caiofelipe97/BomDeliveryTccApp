@@ -50,7 +50,7 @@ const FoodCard = props => {
           <Text style={styles.valueStyle}>A partir de R${value}</Text>
         </View>
       </ListItem>
-    );}
+    );
   } else {
     return (
       <ListItem>

@@ -64,11 +64,9 @@ const LastStepView = props => {
           ))}
         </View>
       );
-
+    }
   });
-
-
-	return (
+  return (
     <View style={styles.viewStyle}>
       <Text style={styles.titleStyle}>{title}</Text>
       {productDetailList}

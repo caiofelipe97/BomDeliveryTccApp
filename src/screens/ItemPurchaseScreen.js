@@ -60,11 +60,11 @@ export default class ItemPurchaseScreen extends Component {
       observations: '',
       cart: cart,
       productDetail: [],
-      restaurant: restaurant,
+      restaurant: restaurant
     };
   }
   componentDidMount() {
-    steps = [
+    let steps = [
       {
         title: 'Escolha um tamanho',
         options: [
@@ -158,7 +158,7 @@ export default class ItemPurchaseScreen extends Component {
   }
 
   handleUniqueChange(choice) {
-    let {step, choices, subtotal} = this.state;
+    let {step, choices, subtotal, steps} = this.state;
     if (steps[step - 1].options[choice].value) {
       subtotal -= steps[step - 1].options[choices[step - 1]].value;
       subtotal += steps[step - 1].options[choice].value;
@@ -171,7 +171,7 @@ export default class ItemPurchaseScreen extends Component {
   }
 
   handleMultipleChange(choice, type) {
-    let {step, choices, subtotal} = this.state;
+    let {step, choices, subtotal, steps} = this.state;
     if (type == 'minus') {
       choices[step - 1][choice] -= 1;
       if (steps[step - 1].options[choice].value) {
@@ -241,7 +241,7 @@ export default class ItemPurchaseScreen extends Component {
     let viewProps = steps[step - 1];
     let choiced = choices[step - 1];
     if (steps.length > 0) {
-      if (step == 1) {
+      if (step === 1) {
         return (
           <UniqueStepView
             viewProps={viewProps}
@@ -249,9 +249,9 @@ export default class ItemPurchaseScreen extends Component {
             handleUniqueChange={this.handleUniqueChange.bind(this)}
             isFirstView={true}
             subtotal={subtotal}
-          />;
-        );
-      } else if (viewProps.type == 'unique') {
+          />
+        )
+      } else if (viewProps.type === 'unique') {
         return (
           <UniqueStepView
             viewProps={viewProps}
@@ -259,9 +259,9 @@ export default class ItemPurchaseScreen extends Component {
             handleUniqueChange={this.handleUniqueChange.bind(this)}
             isFirstView={false}
             subtotal={subtotal}
-          />;
+          />
         );
-      } else if (viewProps.type == 'multiple') {
+      } else if (viewProps.type === 'multiple') {
         return (
           <MultipleStepView
             viewProps={viewProps}
@@ -269,9 +269,9 @@ export default class ItemPurchaseScreen extends Component {
             handleMultipleChange={this.handleMultipleChange.bind(this)}
             isFirstView={false}
             subtotal={subtotal}
-          />;
+          />
         );
-      } else if (step == steps.length) {
+      } else if (step === steps.length) {
         return (
           <LastStepView
             title={'Detalhes do produto'}
@@ -279,7 +279,7 @@ export default class ItemPurchaseScreen extends Component {
             subtotal={subtotal}
             observations={observations}
             handleObservations={this.handleObservations.bind(this)}
-          />;
+          />
         );
       }
     } else {

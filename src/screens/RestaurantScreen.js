@@ -7,13 +7,11 @@ import {
   Tab,
   Tabs,
   List,
-  ListItem,
   ScrollableTab,
   View,
   Icon,
   Badge,
   Fab,
-  Item,
 } from 'native-base';
 import RestaurantCard from '../components/RestaurantCard';
 import FoodList from '../components/FoodList';
@@ -31,7 +29,6 @@ const styles = StyleSheet.create({
     marginRight: 20,
     color: '#FFFF00',
   },
-
 });
 
 export default class RestaurantScreen extends Component {
@@ -84,7 +81,7 @@ export default class RestaurantScreen extends Component {
     };
   }
   componentDidMount() {
-    foods = [
+    let foods = [
       {
         'Promo do dia': [
           {
@@ -103,20 +100,17 @@ export default class RestaurantScreen extends Component {
         Combos: [
           {
             name: 'Arraia',
-            description:
-              'Pão bola, frango desfiado, catupiry, bacon crocante, tomate, alface, milho e molho especial.',
+            description: 'Pão bola, frango desfiado, catupiry, bacon crocante, tomate, alface, milho e molho especial.',
             value: 18.0,
           },
           {
             name: 'Big Tartaruga',
-            description:
-              'Pão bola, hamburguer 90g, muçarela, frango desfiado, bacon crocante, batata palha, tomate, alface, milho e molho especial.',
+            description: 'Pão bola, hamburguer 90g, muçarela, frango desfiado, bacon crocante, batata palha, tomate, alface, milho e molho especial.',
             value: 19.0,
           },
           {
             name: 'Golfinho',
-            description:
-              'Pão bola, hamburguer 90g, muçarela, bacon crocante, milho e molho especial',
+            description: 'Pão bola, hamburguer 90g, muçarela, bacon crocante, milho e molho especial',
             value: 15.0,
           },
         ],
@@ -139,20 +133,17 @@ export default class RestaurantScreen extends Component {
         Sanduíches: [
           {
             name: 'Arraia',
-            description:
-              'Pão bola, frango desfiado, catupiry, bacon crocante, tomate, alface, milho e molho especial.',
+            description: 'Pão bola, frango desfiado, catupiry, bacon crocante, tomate, alface, milho e molho especial.',
             value: 18.0,
           },
           {
             name: 'Big Tartaruga',
-            description:
-              'Pão bola, hamburguer 90g, muçarela, frango desfiado, bacon crocante, batata palha, tomate, alface, milho e molho especial.',
+            description: 'Pão bola, hamburguer 90g, muçarela, frango desfiado, bacon crocante, batata palha, tomate, alface, milho e molho especial.',
             value: 19.0,
           },
           {
             name: 'Golfinho',
-            description:
-              'Pão bola, hamburguer 90g, muçarela, bacon crocante, milho e molho especial',
+            description: 'Pão bola, hamburguer 90g, muçarela, bacon crocante, milho e molho especial',
             value: 15.0,
           },
         ],
@@ -178,7 +169,7 @@ export default class RestaurantScreen extends Component {
   generateFoodList(foods) {
     if (foods){
       return foods.map((foodArrays, i) => {
-        title = Object.keys(foodArrays)[0];
+        let title = Object.keys(foodArrays)[0];
         foods = foodArrays[Object.keys(foodArrays)[0]];
         return (
           <FoodList
@@ -188,7 +179,7 @@ export default class RestaurantScreen extends Component {
             cart={this.state.cart}
             navigation={this.props.navigation}
             restaurant={this.state.restaurant}
-          />;
+          />
         );
       });
     }
@@ -271,7 +262,7 @@ export default class RestaurantScreen extends Component {
               position="bottomRight"
               active={false}
               onPress={() => {
-                pageUUID = Math.random() * 10000;
+                let pageUUID = Math.random() * 10000;
                 navigation.navigate({
                   routeName: 'Cart',
                   params: {

@@ -10,7 +10,7 @@ import {
   ListItem,
   Radio,
 } from 'native-base';
-import {StackActions, NavigationEvents} from 'react-navigation';
+import {StackActions} from 'react-navigation';
 
 const styles = StyleSheet.create({
   content: {
@@ -106,8 +106,7 @@ export default class DeliveryScreen extends Component {
         neighborhood: 'Centro',
         city: 'Alagoa Nova',
         state: 'Paraiba',
-        description:
-          'Rua Luiza Bezerra Motta, 720 - Centro, Alagoa Nova - Paraiba, CEP: 58410-410, Referencia: Em frente ao antigo sitio sao joao',
+        description: 'Rua Luiza Bezerra Motta, 720 - Centro, Alagoa Nova - Paraiba, CEP: 58410-410, Referencia: Em frente ao antigo sitio sao joao',
       },
       {
         title: 'Rua Agamenon Magalhaes',
@@ -120,12 +119,11 @@ export default class DeliveryScreen extends Component {
         neighborhood: 'Centro',
         city: 'Alagoa Nova',
         state: 'Paraiba',
-        description:
-          'Rua Agamenon Magalhaes, 230 - Centro, Alagoa Nova - Paraiba, CEP: 58400-137',
+        description: 'Rua Agamenon Magalhaes, 230 - Centro, Alagoa Nova - Paraiba, CEP: 58400-137',
       },
     ];
     let subtotal = 0;
-    for (i = 0; i < cart.length; i++) {
+    for (let i = 0; i < cart.length; i++) {
       subtotal += cart[i].subtotal * cart[i].amount;
     }
     this.setState({orderSubtotal: subtotal, cart, restaurant, adresses});

@@ -1,17 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet} from 'react-native';
-import {
-  View,
-  Content,
-  Text,
-  Tab,
-  Tabs,
-  List,
-  ListItem,
-  ScrollableTab,
-  Title,
-  Icon,
-} from 'native-base';
+import {View, Content, Text} from 'native-base';
 import RestaurantCard from '../components/RestaurantCard';
 import {ScrollView} from 'react-native-gesture-handler';
 import {formatMoney} from '../utils/Util';

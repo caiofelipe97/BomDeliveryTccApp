@@ -7,13 +7,11 @@ import {
   Text,
   Left,
   Thumbnail,
-  Icon,
   View,
   List,
   ListItem,
   Button,
 } from 'native-base';
-import {StackActions} from 'react-navigation';
 import {formatMoney, formatDate} from '../utils/Util';
 
 const styles = StyleSheet.create({

@@ -26,7 +26,5 @@ function _formatDate(date) {
   return day + '/' + month + '/' + year + ' às ' + hour + 'h' + minutes + 'min';
 }
 
-module.exports = {
-  formatMoney: _formatMoney,
-  formatDate: _formatDate,
-};
+export const formatMoney = _formatMoney;
+export const formatDate = _formatDate;
