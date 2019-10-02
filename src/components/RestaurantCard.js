@@ -51,7 +51,7 @@ const RestaurantCard = props => {
           }
         }}>
         <Left>
-          <Thumbnail square source={img} />
+          <Thumbnail square source={{uri: img}} />
           <Body>
             <Text>{name}</Text>
             <View style={styles.viewFlex}>
