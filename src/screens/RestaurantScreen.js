@@ -113,6 +113,17 @@ export default class RestaurantScreen extends Component {
             img: 'https://static.netshoes.com.br/produtos/bermuda-adidas-badge-of-sport-masculina/06/COL-4409-006/COL-4409-006_zoom1.jpg'
           },
        ]
+      },
+      {
+        Bonés: [
+          {
+            name: 'Bone Nike',
+            description: 'Bone Cinza Nike',
+            value: 30.0,
+            img: 'https://static.netshoes.com.br/produtos/bermuda-moletom-nike-jersey-club-reta-masculina/26/D12-3045-226/D12-3045-226_zoom1.jpg'
+          },
+                
+       ]
       }
     ];
     this.setState({foods});

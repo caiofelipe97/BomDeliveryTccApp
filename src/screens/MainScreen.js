@@ -46,7 +46,7 @@ MainScreen.navigationOptions = ({navigation}) => {
     
           >
       <Picker.Item label="Comidas" value={1} />
-      <Picker.Item label="Roupas" value={2}/>
+      <Picker.Item label="Roupas e acessórios" value={2}/>
       <Picker.Item label="Bebidas" value={3} />
     </Picker>
     ),
