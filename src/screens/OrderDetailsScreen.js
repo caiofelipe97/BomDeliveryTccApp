@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class DemandDetailsScreen extends Component {
+export default class OrderDetailsScreen extends Component {
   static navigationOptions = ({navigation}) => {
     return {
       headerTitle: 'Detalhes do pedido',
@@ -50,9 +50,9 @@ export default class DemandDetailsScreen extends Component {
   constructor(props) {
     super(props);
     const {navigation} = this.props;
-    const demand = navigation.getParam('demand', {});
+    const order = navigation.getParam('order', {});
     this.state = {
-      demand: demand,
+      order: order,
     };
   }
   componentDidMount() {}
@@ -66,7 +66,7 @@ export default class DemandDetailsScreen extends Component {
       adress,
       paymentMethod,
       values,
-    } = this.state.demand;
+    } = this.state.order;
     return (
       <Container>
         <Content>

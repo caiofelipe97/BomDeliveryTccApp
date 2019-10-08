@@ -21,6 +21,7 @@ const MainScreen = ({navigation}) => {
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
+    /*
     db.collection('restaurants')
       .get()
       .then(snap => {
@@ -29,8 +30,11 @@ const MainScreen = ({navigation}) => {
           rests.push(el.data());
         });
         setRestaurants(rests);
+        
       });
+      */
   }, []);
+
 
   const renderRestaurants = () => {
     return restaurants.map((restaurant, index) => (

@@ -7,8 +7,8 @@ import RestaurantScreen from '../screens/RestaurantScreen';
 import InfoScreen from '../screens/InfoScreen';
 import ItemPurchaseScreen from '../screens/ItemPurchaseScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import DemandsScreen from '../screens/DemandsScreen';
-import DemandDetailsScreen from '../screens/DemandDetailsScreen';
+import OrdersScreen from '../screens/OrdersScreen';
+import OrderDetails from '../screens/OrderDetailsScreen';
 import CartScreen from '../screens/CartScreen';
 import DeliveryScreen from '../screens/DeliveryScreen';
 import PaymentScreen from '../screens/PaymentScreen';
@@ -48,13 +48,13 @@ ExploreStack.navigationOptions = ({navigation}) => {
   };
 };
 
-const DemandsStack = createStackNavigator(
+const OrdersStack = createStackNavigator(
   {
-    Demands: DemandsScreen,
-    DemandDetails: DemandDetailsScreen,
+    Orders: OrdersScreen,
+    OrderDetails: OrderDetails,
   },
   {
-    initialRouteKey: 'Demands',
+    initialRouteKey: 'Orders',
     defaultNavigationOptions: {
       headerStyle: {
         backgroundColor: '#800080',
@@ -106,8 +106,8 @@ export default createBottomTabNavigator(
         ),
       },
     },
-    Demands: {
-      screen: DemandsStack,
+    Orders: {
+      screen: OrdersStack,
       navigationOptions: {
         tabBarLabel: 'Pedidos',
         tabBarIcon: ({tintColor}) => (
@@ -127,7 +127,7 @@ export default createBottomTabNavigator(
   },
   {
     initialRouteName: 'Home',
-    order: ['Home', 'Demands', 'Profile'],
+    order: ['Home', 'Orders', 'Profile'],
     tabBarOptions: {
       activeTintColor: '#800080',
       inactiveTintColor: 'gray',

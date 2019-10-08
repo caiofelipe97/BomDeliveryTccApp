@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Content, Text, Container, Tabs, Tab, ScrollableTab} from 'native-base';
 import {StyleSheet} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import DemandCard from '../components/DemandCard';
+import OrderCard from '../components/OrderCard';
 
 const styles = StyleSheet.create({
   titleStyle: {
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class DemandsScreen extends Component {
+export default class OrdersScreen extends Component {
   static navigationOptions = () => {
     return {
       headerTitle: 'Pedidos',
@@ -26,12 +26,12 @@ export default class DemandsScreen extends Component {
     super(props);
     this.state = {
       color: props.color,
-      olderDemands: [],
+      oldOrders: [],
       inProgressDemands: [],
     };
   }
   componentDidMount() {
-    let olderDemands = [
+    let oldOrders = [
       {
         restaurant: {
           name: 'Caio Lanches',
@@ -58,7 +58,7 @@ export default class DemandsScreen extends Component {
         },
         adress:
           'Rua Agamenon Magalhaes, 230 - Centro, Alagoa Nova - Paraiba, CEP: 58400-137',
-        paymentMethod: '',
+        paymentMethod: 'Dinheiro',
         values: {
           subtotal: 24.5,
           delivery: 6,
@@ -96,7 +96,7 @@ export default class DemandsScreen extends Component {
         },
         adress:
           'Rua Luiza Bezerra Motta, 720 - Centro, Alagoa Nova - Paraiba, CEP: 58410-410, Referencia: Em frente ao antigo sitio sao joao',
-        paymentMethod: '',
+        paymentMethod: 'Hipercard - Crédito',
         values: {
           subtotal: 22,
           delivery: 0,
@@ -134,7 +134,7 @@ export default class DemandsScreen extends Component {
         },
         adress:
           'Rua Luiza Bezerra Motta, 720 - Centro, Alagoa Nova - Paraiba, CEP: 58410-410, Referencia: Em frente ao antigo sitio sao joao',
-        paymentMethod: '',
+        paymentMethod: 'Hipercard - Crédito',
         values: {
           subtotal: 48.9,
           delivery: 5,
@@ -148,22 +148,22 @@ export default class DemandsScreen extends Component {
       },
     ];
     let inProgressDemands = [];
-    this.setState({olderDemands, inProgressDemands});
+    this.setState({oldOrders, inProgressDemands});
   }
 
-  renderOlderDemandsCards(demands) {
-    console.log(demands);
-    return demands.map((demand, index) => (
-      <DemandCard
+  renderOlderDemandsCards(orders) {
+    console.log(orders);
+    return orders.map((order, index) => (
+      <OrderCard
         key={index}
-        demand={demand}
+        order={order}
         navigation={this.props.navigation}
       />
     ));
   }
 
   render() {
-    const {olderDemands, inProgressDemands} = this.state;
+    const {oldOrders, inProgressDemands} = this.state;
     return (
       <Container>
         <Tabs
@@ -179,7 +179,7 @@ export default class DemandsScreen extends Component {
             textStyle={{color: '#FFFF00'}}
             activeTabStyle={{backgroundColor: '#800080', width: '50%'}}
             activeTextStyle={{color: '#FFFF00', fontWeight: 'bold'}}>
-            <Content>{this.renderOlderDemandsCards(olderDemands)}</Content>
+            <Content>{this.renderOlderDemandsCards(oldOrders)}</Content>
           </Tab>
           <Tab
             heading="Em Andamento"

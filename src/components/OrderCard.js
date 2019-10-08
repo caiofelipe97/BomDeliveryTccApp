@@ -13,6 +13,7 @@ import {
   Button,
 } from 'native-base';
 import {formatMoney, formatDate} from '../utils/Util';
+import {StackActions} from 'react-navigation';
 
 const styles = StyleSheet.create({
   viewFlex: {
@@ -43,15 +44,23 @@ const styles = StyleSheet.create({
   },
 });
 
-const DemandCard = props => {
-  const {restaurant, date, code, values} = props.demand;
+const OrderCard = props => {
+  const {restaurant, date, code, values} = props.order;
   const {img, name} = restaurant;
-
+  const {navigation} = props;
+  const pushAction = StackActions.push({
+    routeName: 'OrderDetails',
+    params: {
+      order: props.order,
+    },
+  });
   return (
     <Card>
       <CardItem style={styles.cardStyle}>
         <List style={{flex: 1}}>
-          <ListItem style={{flex: 1, marginLeft: 10}} onPress={{}}>
+          <ListItem style={{flex: 1, marginLeft: 10}} onPress={() => {
+                  navigation.dispatch(pushAction);
+                }}>
             <Left>
               <Thumbnail square source={img} />
               <Body>
@@ -71,10 +80,14 @@ const DemandCard = props => {
           </ListItem>
           <ListItem style={{flex: 1, width: '100%', height: 50}}>
             <View style={styles.buttonsView}>
-              <Button transparent onPress={{}}>
+              <Button transparent onPress={() => {}}>
                 <Text style={styles.textButtomStyle}>Avaliar</Text>
               </Button>
-              <Button transparent onPress={{}}>
+              <Button
+                transparent
+                onPress={() => {
+                  navigation.dispatch(pushAction);
+                }}>
                 <Text style={styles.textButtomStyle}>Detalhes</Text>
               </Button>
             </View>
@@ -85,4 +98,4 @@ const DemandCard = props => {
   );
 };
 
-export default DemandCard;
+export default OrderCard;
