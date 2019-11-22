@@ -80,90 +80,153 @@ export default class RestaurantScreen extends Component {
       cart: cart,
     };
   }
-  componentDidMount() {
-    let foods = [
-      {
-        'Promo do dia': [
+  componentDidMount() {4
+    const { restaurant } = this.state;
+    let foods = []
+    if(restaurant && restaurant.type == "food"){
+      foods = [
+        {'Promo do dia':[
           {
-            name: 'Promoção Pizza Grande',
-            description: 'Escolha até 2 sabores.',
-            value: 28.99,
+           'name': 'Promoção Pizza Grande',
+           'description': 'Escolha até 2 sabores.',
+           'value': 28.99
           },
           {
-            name: 'Macarronada à Bolonhesa',
-            description: 'Serve 2 Pessoas.',
-            value: 22.0,
+            'name': 'Macarronada à Bolonhesa',
+            'description': 'Serve 2 Pessoas.',
+            'value': 22.00
+           }
+        ]
+      },
+        {'Combos':[
+          {
+            'name': 'Arraia',
+            'description': 'Pão bola, frango desfiado, catupiry, bacon crocante, tomate, alface, milho e molho especial.',
+            'value': 18.00
+          },
+          {
+            'name': 'Big Tartaruga',
+            'description': 'Pão bola, hamburguer 90g, muçarela, frango desfiado, bacon crocante, batata palha, tomate, alface, milho e molho especial.',
+            'value': 19.00
+          },
+          {
+            'name': 'Golfinho',
+            'description': 'Pão bola, hamburguer 90g, muçarela, bacon crocante, milho e molho especial',
+            'value': 15.00
+          }
+        ]},
+        {'Pizzas':[
+          {
+          'name': 'Pizza Grande',
+           'description': 'Escolha até 2 sabores.',
+           'value': 35.00
+          },
+          {
+            'name': 'Pizza Pequena',
+             'description': '',
+             'value': 25.00
+            }
+        ]},
+        {'Sanduíches':[
+          {
+            'name': 'Arraia',
+            'description': 'Pão bola, frango desfiado, catupiry, bacon crocante, tomate, alface, milho e molho especial.',
+            'value': 18.00
+          },
+          {
+            'name': 'Big Tartaruga',
+            'description': 'Pão bola, hamburguer 90g, muçarela, frango desfiado, bacon crocante, batata palha, tomate, alface, milho e molho especial.',
+            'value': 19.00
+          },
+          {
+            'name': 'Golfinho',
+            'description': 'Pão bola, hamburguer 90g, muçarela, bacon crocante, milho e molho especial',
+            'value': 15.00
+          }
+        ]},
+        {'Bebidas':[
+          {
+            'name': 'Refrigerante 1L',
+             'description': '',
+             'value': 7.00
+          },
+          {
+            'name': 'Refrigerante 2L',
+            'description': '',
+            'value': 10.00
+          }
+        ]},
+      
+    ]
+  }
+    
+    else if(restaurant && restaurant.type == clothes){
+      foods = [
+      {
+        'Camisetas': [
+          {
+            name: 'Camiseta Calvin Klein Azul',
+            description: 'Camise Calvin Klen cor Azul/Branco',
+            value: 79.90,
+            img: 'https://http2.mlstatic.com/camiseta-calvin-klein-camisa-blusa-t-shirt-masculina-ck-D_NQ_NP_957208-MLB26997553993_032018-F.jpg'
+          },
+          {
+            name: 'Camiseta Calvin Klein Básica',
+            description: 'Camiseta Calvin Klein Básica cor Cinza',
+            value: 59.90,
+            img: 'https://img.irroba.com.br/fit-in/600x600/diretodo/catalog/camisetas/calvin-klein/c76.jpg'
           },
         ],
       },
       {
-        Combos: [
+        Bermudas: [
           {
-            name: 'Arraia',
-            description: 'Pão bola, frango desfiado, catupiry, bacon crocante, tomate, alface, milho e molho especial.',
-            value: 18.0,
+            name: 'Bermuda Nike',
+            description: 'Bermuda Moletom Cinza Nike',
+            value: 30.0,
+            img: 'https://static.netshoes.com.br/produtos/bermuda-moletom-nike-jersey-club-reta-masculina/26/D12-3045-226/D12-3045-226_zoom1.jpg'
           },
           {
-            name: 'Big Tartaruga',
-            description: 'Pão bola, hamburguer 90g, muçarela, frango desfiado, bacon crocante, batata palha, tomate, alface, milho e molho especial.',
-            value: 19.0,
+            name: 'Short esportivo Adidas',
+            description: 'Short esportivo preto Adidas',
+            value: 19.90,
+            img: 'https://static.netshoes.com.br/produtos/bermuda-adidas-badge-of-sport-masculina/06/COL-4409-006/COL-4409-006_zoom1.jpg'
           },
-          {
-            name: 'Golfinho',
-            description: 'Pão bola, hamburguer 90g, muçarela, bacon crocante, milho e molho especial',
-            value: 15.0,
-          },
-        ],
+       ]
       },
       {
-        Pizzas: [
+        Bonés: [
           {
-            name: 'Pizza Grande',
-            description: 'Escolha até 2 sabores.',
-            value: 35.0,
+            name: 'Bone Nike',
+            description: 'Bone Cinza Nike',
+            value: 30.0,
+            img: 'https://static.netshoes.com.br/produtos/bermuda-moletom-nike-jersey-club-reta-masculina/26/D12-3045-226/D12-3045-226_zoom1.jpg'
           },
-          {
-            name: 'Pizza Pequena',
-            description: '',
-            value: 25.0,
-          },
-        ],
-      },
-      {
-        Sanduíches: [
-          {
-            name: 'Arraia',
-            description: 'Pão bola, frango desfiado, catupiry, bacon crocante, tomate, alface, milho e molho especial.',
-            value: 18.0,
-          },
-          {
-            name: 'Big Tartaruga',
-            description: 'Pão bola, hamburguer 90g, muçarela, frango desfiado, bacon crocante, batata palha, tomate, alface, milho e molho especial.',
-            value: 19.0,
-          },
-          {
-            name: 'Golfinho',
-            description: 'Pão bola, hamburguer 90g, muçarela, bacon crocante, milho e molho especial',
-            value: 15.0,
-          },
-        ],
-      },
-      {
-        Bebidas: [
-          {
-            name: 'Refrigerante 1L',
-            description: '',
-            value: 7.0,
-          },
-          {
-            name: 'Refrigerante 2L',
-            description: '',
-            value: 10.0,
-          },
-        ],
-      },
+                
+       ]
+      }
     ];
-
+  }else if(restaurant && restaurant.type == drink){
+    foods = [
+      {
+        'Cervejas': [
+          {
+            name: 'Cerveja itaipava premium 355ml',
+            description: 'Lata 355ml',
+            value: 2.90,
+            img: 'https://static.carrefour.com.br/medias/sys_master/images/images/ha3/h38/h00/h00/9393717772318.jpg'
+          },
+          {
+            name: 'Devassa Loura 269ml',
+            description: 'Cerveja puro malte lager',
+            value: 2.55,
+            img: 'https://static.carrefour.com.br/medias/sys_master/images/images/hc9/h45/h00/h00/13247486820382.jpg'
+          },
+        ],
+      },
+    ]
+  }
+    
     this.setState({foods});
   }
   generateFoodList(foods) {
@@ -204,35 +267,28 @@ export default class RestaurantScreen extends Component {
               <ScrollableTab style={{backgroundColor: '#800080'}} />
             )}>
             <Tab
-              heading="Promo do dia"
+              heading="Camisetas"
               tabStyle={{backgroundColor: '#800080'}}
               textStyle={{color: '#FFFF00'}}
               activeTabStyle={{backgroundColor: '#800080'}}
               activeTextStyle={{color: '#FFFF00', fontWeight: 'bold'}}
             />
             <Tab
-              heading="Combos"
+              heading="Bermudas"
               tabStyle={{backgroundColor: '#800080'}}
               textStyle={{color: '#FFFF00'}}
               activeTabStyle={{backgroundColor: '#800080'}}
               activeTextStyle={{color: '#FFFF00', fontWeight: 'bold'}}
             />
             <Tab
-              heading="Pizzas"
+              heading="Bonés"
               tabStyle={{backgroundColor: '#800080'}}
               textStyle={{color: '#FFFF00'}}
               activeTabStyle={{backgroundColor: '#800080'}}
               activeTextStyle={{color: '#FFFF00', fontWeight: 'bold'}}
             />
             <Tab
-              heading="Sanduiches"
-              tabStyle={{backgroundColor: '#800080'}}
-              textStyle={{color: '#FFFF00'}}
-              activeTabStyle={{backgroundColor: '#800080'}}
-              activeTextStyle={{color: '#FFFF00', fontWeight: 'bold'}}
-            />
-            <Tab
-              heading="Bebidas"
+              heading="Óculos"
               tabStyle={{backgroundColor: '#800080'}}
               textStyle={{color: '#FFFF00'}}
               activeTabStyle={{backgroundColor: '#800080'}}

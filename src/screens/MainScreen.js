@@ -1,26 +1,24 @@
 import React, {useState, useEffect} from 'react';
-import * as firebase from 'firebase';
+import firebase from '../Firebase.js'
 require('firebase/firestore');
 import {Content, Picker} from 'native-base';
 import RestaurantCard from '../components/RestaurantCard';
-var firebaseConfig = {
-  apiKey: 'AIzaSyD6rCLWpVS9pqW8vc7-_TeP7sTfkXZhz_g',
-  authDomain: 'bom-delivery.firebaseapp.com',
-  databaseURL: 'https://bom-delivery.firebaseio.com',
-  projectId: 'bom-delivery',
-  storageBucket: '',
-  messagingSenderId: '92000871135',
-  appId: '1:92000871135:web:5ef14997953c0a759dbf6a',
-  measurementId: 'G-VNXKTWX8CP',
-};
 
-firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 const MainScreen = ({navigation}) => {
   const [restaurants, setRestaurants] = useState([]);
-
+  const [type, setType] = useState("food")
+  const changeTypeHandler= (type) => {
+    navigation.setParams({
+      type: type
+  });
+    setType(type)
+  }
   useEffect(() => {
+    navigation.setParams({
+      handleTypeChange: changeTypeHandler
+  });
     db.collection('restaurants')
       .get()
       .then(snap => {
@@ -31,9 +29,11 @@ const MainScreen = ({navigation}) => {
         setRestaurants(rests);
       });
   }, []);
-
+  
   const renderRestaurants = () => {
-    return restaurants.map((restaurant, index) => (
+    
+    const filteredRestaurants = restaurants.filter((restaurant)=> restaurant.type == type);
+    return filteredRestaurants.map((restaurant, index) => (
       <RestaurantCard
         key={index}
         restaurant={restaurant}
@@ -47,12 +47,14 @@ const MainScreen = ({navigation}) => {
 };
 
 MainScreen.navigationOptions = ({navigation}) => {
+  const {params = {}} = navigation.state;
+
   return {
     headerTitle: 'Bom Delivery',
     headerRight: (
       <Picker
         mode="dropdown"
-        selectedValue={1}
+        selectedValue={params.type}
         style={{
           height: 50,
           width: 130,
@@ -60,10 +62,13 @@ MainScreen.navigationOptions = ({navigation}) => {
           fontWeight: 'bold',
           paddingLeft: 0,
           marginLeft: 0,
-        }}>
-        <Picker.Item label="Comidas" value={1} />
-        <Picker.Item label="Roupas" value={2} />
-        <Picker.Item label="Bebidas" value={3} />
+        }}
+        onValueChange={(itemValue) =>
+          params.handleTypeChange(itemValue)
+    } >
+        <Picker.Item label="Comidas" value={"food"} />
+        <Picker.Item label="Roupas e Acessórios" value={"clothes"} />
+        <Picker.Item label="Bebidas" value={"drink"} />
       </Picker>
     ),
   };

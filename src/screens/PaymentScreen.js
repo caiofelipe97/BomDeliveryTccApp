@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Alert} from 'react-native';
+import firebase from '../Firebase.js'
+require('firebase/firestore');
 import {
   Content,
   Text,
@@ -57,8 +59,10 @@ const styles = StyleSheet.create({
     color: '#008000',
   },
 });
+const db = firebase.firestore();
 
 export default class PaymentScreen extends Component {
+  
   static navigationOptions = ({navigation}) => {
     const popAction = StackActions.pop({
       n: 1,
@@ -77,6 +81,8 @@ export default class PaymentScreen extends Component {
   };
 
   constructor(props) {
+    //this.ref = db.collection('orders');
+
     super(props);
     this.state = {
       cart: [],
@@ -170,6 +176,20 @@ export default class PaymentScreen extends Component {
                     [{text: 'OK', onPress: () => console.log('OK Pressed')}],
                   );
                 } else {
+                  /*
+                  this.ref.add({
+                    cart,
+                    restaurant,
+                    adress,
+                    choiced,
+                    payment
+                  }).then((docRef) => {
+                    Ref.onSnapshot();
+                  })
+                  .catch((error) => {
+                    console.error("Error adding document: ", error);
+                  });
+                  */
                   const resetAction = StackActions.reset({
                     index: 0,
                     actions: [NavigationActions.navigate({routeName: 'Home'})],

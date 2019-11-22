@@ -1,13 +1,10 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {View, ListItem, Text} from 'native-base';
+import {View, ListItem, Text, Thumbnail} from 'native-base';
 import {StackActions} from 'react-navigation';
+import {formatMoney} from '../utils/Util'
 
 const styles = StyleSheet.create({
-  viewFlex: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   nameStyle: {
     fontSize: 18,
   },
@@ -22,6 +19,11 @@ const styles = StyleSheet.create({
   valueStyle: {
     color: '#008000',
   },
+  viewStyle:{
+    flex:1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  }
 });
 
 const FoodCard = props => {
@@ -34,7 +36,7 @@ const FoodCard = props => {
     },
   });
 
-  const {name, description, value} = props.food;
+  const {name, description, value, img} = props.food;
   const {inactive} = props;
 
   if (!inactive) {
@@ -44,20 +46,26 @@ const FoodCard = props => {
         onPress={() => {
           props.navigation.dispatch(pushAction);
         }}>
-        <View>
-          <Text style={styles.nameStyle}>{name}</Text>
-          <Text style={styles.descriptionStyle}>{description}</Text>
-          <Text style={styles.valueStyle}>A partir de R${value}</Text>
+        <View style={styles.viewStyle}>
+          <View>
+            <Text style={styles.nameStyle}>{name}</Text>
+            <Text style={styles.descriptionStyle}>{description}</Text>
+            <Text style={styles.valueStyle}>A partir de {formatMoney(value)}</Text>
+          </View>
+          <Thumbnail square source={{uri: img}} />
         </View>
       </ListItem>
     );
   } else {
     return (
-      <ListItem>
-        <View>
-          <Text style={styles.nameInactiveStyle}>{name}</Text>
-          <Text style={styles.descriptionStyle}>{description}</Text>
-          <Text style={styles.valueStyle}>A partir de R${value}</Text>
+      <ListItem>       
+       <View style={styles.viewStyle}>
+          <View>
+            <Text style={styles.nameInactiveStyle}>{name}</Text>
+            <Text style={styles.descriptionStyle}>{description}</Text>
+            <Text style={styles.valueStyle}>A partir de R${value}</Text>
+          </View>
+        <Thumbnail square source={{uri: img}} />
         </View>
       </ListItem>
     );

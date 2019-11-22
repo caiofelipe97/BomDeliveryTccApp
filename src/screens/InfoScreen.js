@@ -49,7 +49,7 @@ export default class InfoScreen extends Component {
 
   render() {
     const {restaurant} = this.state;
-    const {paymentMethods, deliveryPrice, location} = this.state.restaurant;
+    const {paymentMethods, deliveryPrice, address} = this.state.restaurant;
     const paymentMethodView = paymentMethods.map(paymentMethod => {
       return (
         <View>
@@ -82,7 +82,7 @@ export default class InfoScreen extends Component {
           <View style={styles.viewBorderStyle}>
             <View style={styles.viewStyle}>
               <Text style={styles.titleStyle}>Localização</Text>
-              <Text>{location}</Text>
+              <Text>{address}</Text>
             </View>
           </View>
         </ScrollView>
