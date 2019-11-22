@@ -160,7 +160,7 @@ export default class RestaurantScreen extends Component {
     ]
   }
     
-    else if(restaurant && restaurant.type == clothes){
+    else if(restaurant && restaurant.type == "clothes"){
       foods = [
       {
         'Camisetas': [
@@ -206,7 +206,7 @@ export default class RestaurantScreen extends Component {
        ]
       }
     ];
-  }else if(restaurant && restaurant.type == drink){
+  }else if(restaurant && restaurant.type == "drink"){
     foods = [
       {
         'Cervejas': [
@@ -261,11 +261,14 @@ export default class RestaurantScreen extends Component {
       <Container>
         <Content>
           <RestaurantCard restaurant={restaurant} inactive={true} />
-          <Tabs
+          { restaurant.type == "clothes" && 
+          (
+            <Tabs
             tabBarUnderlineStyle={{backgroundColor: '#FFFF00'}}
             renderTabBar={() => (
               <ScrollableTab style={{backgroundColor: '#800080'}} />
             )}>
+            
             <Tab
               heading="Camisetas"
               tabStyle={{backgroundColor: '#800080'}}
@@ -295,6 +298,71 @@ export default class RestaurantScreen extends Component {
               activeTextStyle={{color: '#FFFF00', fontWeight: 'bold'}}
             />
           </Tabs>
+          )
+            }
+            { restaurant.type == "food" && (
+              <Tabs
+            tabBarUnderlineStyle={{backgroundColor: '#FFFF00'}}
+            renderTabBar={() => (
+              <ScrollableTab style={{backgroundColor: '#800080'}} />
+            )}>
+            
+            <Tab
+              heading="Promo do dia"
+              tabStyle={{backgroundColor: '#800080'}}
+              textStyle={{color: '#FFFF00'}}
+              activeTabStyle={{backgroundColor: '#800080'}}
+              activeTextStyle={{color: '#FFFF00', fontWeight: 'bold'}}
+            />
+            <Tab
+              heading="Combos"
+              tabStyle={{backgroundColor: '#800080'}}
+              textStyle={{color: '#FFFF00'}}
+              activeTabStyle={{backgroundColor: '#800080'}}
+              activeTextStyle={{color: '#FFFF00', fontWeight: 'bold'}}
+            />
+            <Tab
+              heading="Pizzas"
+              tabStyle={{backgroundColor: '#800080'}}
+              textStyle={{color: '#FFFF00'}}
+              activeTabStyle={{backgroundColor: '#800080'}}
+              activeTextStyle={{color: '#FFFF00', fontWeight: 'bold'}}
+            />
+            <Tab
+              heading="Sanduíches"
+              tabStyle={{backgroundColor: '#800080'}}
+              textStyle={{color: '#FFFF00'}}
+              activeTabStyle={{backgroundColor: '#800080'}}
+              activeTextStyle={{color: '#FFFF00', fontWeight: 'bold'}}
+            />
+            <Tab
+              heading="Bebidas"
+              tabStyle={{backgroundColor: '#800080'}}
+              textStyle={{color: '#FFFF00'}}
+              activeTabStyle={{backgroundColor: '#800080'}}
+              activeTextStyle={{color: '#FFFF00', fontWeight: 'bold'}}
+            />
+          </Tabs>
+            )
+            }
+            { restaurant.type == "drink" && (
+              <Tabs
+            tabBarUnderlineStyle={{backgroundColor: '#FFFF00'}}
+            renderTabBar={() => (
+              <ScrollableTab style={{backgroundColor: '#800080'}} />
+            )}>
+            
+            <Tab
+              heading="Cervejas"
+              tabStyle={{backgroundColor: '#800080'}}
+              textStyle={{color: '#FFFF00'}}
+              activeTabStyle={{backgroundColor: '#800080'}}
+              activeTextStyle={{color: '#FFFF00', fontWeight: 'bold'}}
+            />
+          </Tabs>
+            )
+            }
+       
           <List>{this.generateFoodList(foods)}</List>
         </Content>
         {cart && cart.length !== 0 && (
