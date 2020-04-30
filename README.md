@@ -1,5 +1,5 @@
 # BomDeliveryApp
--  O Bom Delivery é um aplicativo que permite a intermediação da venda de produtos de estabelecimentos delivery de forma intuitiva.
+-  O Bom Delivery é um aplicativo desenvolvido em react native que permite a intermediação da venda de produtos de estabelecimentos delivery de forma intuitiva.
 
 ## how to run
 -  Run "npm install"
